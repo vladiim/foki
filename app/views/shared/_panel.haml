@@ -1,0 +1,16 @@
+%article.col-sm-4.project
+  .panel.panel-default
+    %header.panel-heading
+      %h3.panel-title= title
+      .pull-right.settings
+        %span.glyphicon.glyphicon-cog{'aria-hidden' => true}
+    .panel-body
+      .col-xs-7
+        %p.stat= stat
+      .col-xs-5
+        %small.change.positive
+          = change
+          %span.details daily change
+    - if defined?(url)
+      .panel-footer
+        %a.btn.wide.btn-default{href: url} Visit

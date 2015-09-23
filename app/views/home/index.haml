@@ -1,0 +1,9 @@
+.jumbotron
+  %header
+    %h1 DataCroc
+    %h3 Data informed project management
+
+  = simple_form_for @login, url: login_url, method: :post do |f|
+    = f.input :email
+    = f.input :password
+    = f.button :submit, "Login", class: 'btn'

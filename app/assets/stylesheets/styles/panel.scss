@@ -1,0 +1,26 @@
+.panel {
+  .settings {
+    cursor: pointer;
+    margin: -17px 0px 0 0;
+  }
+
+  .stat {
+    font-size: 350%;
+    display: block;
+    text-align: center;
+  }
+
+  .change {
+    display: block;
+    text-align: right;
+    margin: 10px -15px;
+
+    &.positive {
+      color: $positive-change;
+    }
+
+    &.negative {
+      color: $negative-change;
+    }
+  }
+}
