@@ -1,0 +1,19 @@
+%header
+  %h1= "#{@program.title.titleize} traction graph"
+
+%section#traction-graph
+
+%hr
+
+%section
+  %header
+    %h2 KPIs
+
+  %section.row.kpis
+    = render partial: 'shared/panel', locals: { title: 'Sign up', stat: '2%', change: '0.5%', editable: true }
+    = render partial: 'shared/panel', locals: { title: 'CLV', stat: '4%', change: '-2.3%', editable: true }
+    = render partial: 'shared/panel', locals: { title: 'Newsletter', stat: '3%', change: '0%', editable: true }
+
+%hr
+
+= render partial: 'projects/modal'

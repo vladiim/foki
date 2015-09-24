@@ -2,8 +2,8 @@
   .panel.panel-default
     %header.panel-heading
       %h3.panel-title= title
-      .pull-right.settings
-        %span.glyphicon.glyphicon-cog{'aria-hidden' => true}
+      .pull-right.dropdown.settings
+        %span{class: 'glyphicon glyphicon-cog', 'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => '#settingsModal'}
     .panel-body
       .col-xs-7
         %p.stat= stat
@@ -14,3 +14,23 @@
     - if defined?(url)
       .panel-footer
         %a.btn.wide.btn-default{href: url} Visit
+
+.modal.fade#settingsModal
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss' => 'modal', 'aria-label' => 'Close'}
+          %span{'aria-hidden' => 'true'} &times;
+        %h4.modal-title Settings
+      .modal-body
+        %form
+          .form-group
+            %label Title
+            %input{type: 'text', class: 'form-control', placeholder: 'Current title'}
+          .form-group
+            %label Upload data
+            %button.btn.btn-default{href: '#'} Select CSV file
+        %hr
+        %button.btn.btn-danger{href: '#'} Delete permenantly
+      .modal-footer
+        %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

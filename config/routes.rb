@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   post 'login' => 'login#post'
 
-  resources :projects
+  resources :programs
 
   root 'home#index'
 

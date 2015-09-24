@@ -1,0 +1,1 @@
+Program = Struct.new(:title)
