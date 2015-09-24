@@ -10,7 +10,8 @@
     %body{ 'data-no-turbolink' => true }
   - else
     %body
-  %nav
+
+  - if user_signed_in?
     = render partial: 'layouts/nav'
   .container
     = yield

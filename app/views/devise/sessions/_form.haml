@@ -1,0 +1,8 @@
+= simple_form_for(resource, as: :user, url: session_path(:user)) do |f|
+  .form-inputs
+    = f.input :email, required: true, class: 'form-control'
+    = f.input :password, required: true, class: 'form-control'
+  .form-actions
+    = f.button :submit, 'Sign in', class: 'btn btn-default'
+
+-# = render 'devise/shared/links'

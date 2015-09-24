@@ -62,6 +62,7 @@ makeGraph = (error, data) ->
   rotateXAxis(x)
 
 $(document).ready ->
-  queue()
-    .defer(d3.json, '/data.json')
-    .await(makeGraph)
+  if $(CHART_SELECTOR).lenth > 0
+    queue()
+      .defer(d3.json, '/data.json')
+      .await(makeGraph)

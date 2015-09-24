@@ -8,3 +8,5 @@
   %ul.nav.navbar-nav.navbar-right
     %li
       %a{ href: '#' } Profile
+    %li
+      = link_to 'Logout', destroy_user_session_path, method: :delete

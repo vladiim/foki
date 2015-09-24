@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @login = LoginForm.new
+    @user = User.new
   end
 end
