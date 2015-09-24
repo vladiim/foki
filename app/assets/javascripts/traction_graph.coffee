@@ -18,7 +18,7 @@ addXAxis = (chart) ->
   x
 
 rotateXAxis = (x) ->
-  x.shapes.selectAll('text').attr 'transform', 'translate(-80, 60) rotate(-45)'
+  x.shapes.selectAll('text').attr 'transform', 'translate(-80, 50) rotate(-45)'
 
 addYAxis = (chart) ->
   y            = chart.addMeasureAxis('y', 'perc')
