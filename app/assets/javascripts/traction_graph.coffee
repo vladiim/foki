@@ -19,7 +19,6 @@ addXAxis = (chart) ->
 
 rotateXAxis = (x) ->
   x.shapes.selectAll('text').attr 'transform', 'translate(-80, 55) rotate(-45)'
-  return
 
 addYAxis = (chart) ->
   y            = chart.addMeasureAxis('y', 'perc')
@@ -35,20 +34,32 @@ addSeries = (chart) ->
   series
 
 addLegend = (chart) ->
-  chart.addLegend '0%', 10, 500, 20, 'right'
-  return
+  legend = chart.addLegend '0%', 10, 500, 20, 'right'
+  legend
+
+addInteractiveLegends = (legend) ->
+  $('g.dimple-legend text').on 'click', (event) ->
+    metric = $($(event.target)).text()
+    $modal = $('#metricModal')
+    $modal.modal('show');
+    $modal.find('.modal-title').text("#{metric} projects")
+    width = parseInt($('.modal-content').css('width'), 10)
+    
+
+# TODO: filter by last week, filter by month, year etc
+# Latest period only
+# dimple.filterData(data, "Date", "01/12/2012");
 
 makeGraph = (error, data) ->
-  console.log('here')
   data   = parseData(data)
   chart  = createChart(data)
   x      = addXAxis(chart)
   y      = addYAxis(chart)
   series = addSeries(chart)
-  addLegend(chart)
+  legend = addLegend(chart)
   chart.draw()
+  addInteractiveLegends()
   rotateXAxis(x)
-  return
 
 $(document).ready ->
   queue()

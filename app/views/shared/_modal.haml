@@ -1,0 +1,24 @@
+.modal.fade#metricModal
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %h4.modal-title
+      .modal-body
+        %ul.list-group
+          - ['Add product testimonial', 'Bigger CTA button', 'Sticky nav', 'Share buttons', 'OAuth login'].each do |title|
+            - checked = [true, false].sample
+            - item_color = checked ? 'list-group-item-success' : ''
+            %li{class: "list-group-item #{item_color}"}
+              %h4.list-group-item-heading= title
+              .list-group-item-text
+                %input{type: 'checkbox', checked: checked}
+                  - if checked
+                    = "Live #{['26th August 2015', 'Two days ago'].sample}"
+                  - else
+                    Not live
+      .modal-footer
+        %form.form-inline
+          .input-group
+            %input{type: 'text', class: 'form-control', placeholder: 'Add project'}
+            %span.input-group-btn
+              %button{type: 'submit', class: 'btn btn-default'} Save
