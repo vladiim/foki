@@ -4,10 +4,6 @@ get up on heroku
 
 # Functionality
 
-* User CRUD
-
-* Only show nav if current_user
-
 * Program CRUD
 
 * KPI CRUD

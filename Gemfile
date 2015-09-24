@@ -26,6 +26,9 @@ gem 'pg', '~> 0.18.1'
 # ------ # FUNCTIONALITY # ------ #
 gem 'devise', '~> 3.5.2'
 
+# ------ # PERFORMANCE # ------ #
+gem 'puma', '~> 2.6.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
