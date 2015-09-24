@@ -21,9 +21,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # ------ # DATABASE # ------ #
-group :production do
-  gem 'pg'
-end
+gem 'pg', '~> 0.18.1'
 
 # ------ # FUNCTIONALITY # ------ #
 
