@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.2'
+
 gem 'rails', '4.2.4'
 
 # ------ # ASSETS # ------ #
@@ -28,6 +30,7 @@ gem 'devise', '~> 3.5.2'
 
 # ------ # PERFORMANCE # ------ #
 gem 'puma', '~> 2.6.0'
+gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
