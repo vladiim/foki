@@ -10,9 +10,7 @@
     %h2 KPIs
 
   %section.row.kpis
-    = render partial: 'shared/panel', locals: { title: 'Sign up', stat: '2%', change: '0.5%', editable: true }
-    = render partial: 'shared/panel', locals: { title: 'CLV', stat: '4%', change: '-2.3%', editable: true }
-    = render partial: 'shared/panel', locals: { title: 'Newsletter', stat: '3%', change: '0%', editable: true }
+    = render partial: 'shared/panel', collection: @kpis
 
 %hr
 

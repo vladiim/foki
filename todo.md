@@ -1,4 +1,12 @@
-get up on heroku
+# best practice
+
+* deployment todo list
+
+    - inc run heroku run:detached rake db:migrate
+
+* flash messages
+
+* form validation error messages
 
 ***
 
@@ -14,6 +22,16 @@ get up on heroku
 
     - Add metric
 
+* Data integrations
+
+    - Look at exsisting APIs: https://www.xplenty.com/integrations/
+
+* Onboarding
+
+    - Demo dashboard
+
+    - Onboarding process
+
 ***
 
 # Performance
@@ -24,4 +42,8 @@ get up on heroku
 
 # Analytics
 
+* server side segment for every action
+
 * Setup segment, GTM, GA and New Relic
+
+***

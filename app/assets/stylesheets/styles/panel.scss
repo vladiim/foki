@@ -23,4 +23,14 @@
       color: $negative-change;
     }
   }
+
+  .add-program {
+    display: block;
+    text-align: center;
+
+    a {
+      font-size: 670%;
+      cursor: pointer;
+    }
+  }
 }

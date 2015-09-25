@@ -1,19 +1,21 @@
 %article.col-sm-4.project
   .panel.panel-default
     %header.panel-heading
-      %h3.panel-title= title
+      %h3.panel-title= panel.title
       .pull-right.dropdown.settings
         %span{class: 'glyphicon glyphicon-cog', 'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => '#settingsModal'}
     .panel-body
       .col-xs-7
-        %p.stat= stat
+        -# %p.stat= panel.stat
+        %p.stat 32%
       .col-xs-5
         %small.change.positive
-          = change
+          -# = panel.change
+          2%
           %span.details daily change
-    - if defined?(url)
+    - if panel.class.to_s == 'Program'
       .panel-footer
-        %a.btn.wide.btn-default{href: url} Visit
+        = link_to 'View program', program_path(panel), class: 'btn wide btn-default'
 
 .modal.fade#settingsModal
   .modal-dialog.modal-lg
@@ -31,6 +33,7 @@
             %label Upload data
             %button.btn.btn-default{href: '#'} Select CSV file
         %hr
-        %button.btn.btn-danger{href: '#'} Delete permenantly
+        - if defined?(panel.persisted?)
+          = link_to 'Delete permanantly', panel,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
       .modal-footer
         %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

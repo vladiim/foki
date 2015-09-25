@@ -1,0 +1,25 @@
+%article.col-sm-4.program
+  .panel.panel-default
+    %header.panel-heading
+      %h3.panel-title Create new
+    .panel-body
+      .add-program
+        %a{class: 'new', 'data-toggle' => 'modal', 'data-target' => '#newProgramModal'} +
+
+.modal.fade#newProgramModal
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss' => 'modal', 'aria-label' => 'Close'}
+          %span{'aria-hidden' => 'true'} &times;
+        %h4.modal-title New program
+      .modal-body
+        -# %form
+        = simple_form_for @resource_name, url: @resource_path do |f|
+          -# .form-group
+          = f.input :title, class: 'form-control', placeholder: 'Program title'
+          -# %label Title
+          -# %input{type: 'text', class: 'form-control', placeholder: 'Program title'}
+          = f.button :submit, 'Create program', class: 'btn btn-default'
+      .modal-footer
+        %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

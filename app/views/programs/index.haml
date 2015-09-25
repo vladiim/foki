@@ -2,4 +2,5 @@
   %h1 Programs
 
   %section.row
-    = render partial: 'shared/panel', locals: { title: 'myAudi', stat: '2%', change: '0.5%', url: '/programs/1-myaudi' }
+    = render partial: 'shared/panel', collection: @programs
+    = render partial: 'programs/new'
