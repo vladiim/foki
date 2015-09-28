@@ -7,21 +7,14 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    @program = Program.find(params[:id])
-    @kpis    = [OpenStruct.new(title: 'Sign up', stat: '2%', change: '0.5%', editable: true),
-                OpenStruct.new(title: 'CLV', stat: '4%', change: '-2.3%', editable: true),
-                OpenStruct.new(title: 'Newsletter', stat: '3%', change: '0%', editable: true)]
+    @program = current_user.program_with_metrics(params[:id])
+    @metrics = @program.metrics
+    set_metric_resource
   end
 
   def create
-    # byebug
     @program = current_user.programs.build(program_params)
-    if @program.save
-      redirect_to @program
-    else
-      render 'index'
-      flash[:error] = 'There was an issue creating the new program'
-    end
+    @program.save ? redirect_to_program(@program) : render_index
   end
 
   def destroy
@@ -31,9 +24,24 @@ class ProgramsController < ApplicationController
 
   private
 
+  def render_index
+    render 'index'
+    flash[:error] = "There was an issue creating the new program."
+  end
+
+  def redirect_to_program(program)
+    redirect_to program
+    flash[:success] = "New program '#{program.title}' created."
+  end
+
   def set_resource
     @resource_name = :program
-    @resource_path  = programs_path
+    @resource_path = programs_path
+  end
+
+  def set_metric_resource
+    @resource_name = :metric
+    @resource_path = metrics_path
   end
 
   def program_params

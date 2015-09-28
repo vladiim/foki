@@ -1,0 +1,23 @@
+%article.col-sm-4.program
+  .panel.panel-default
+    %header.panel-heading
+      %h3.panel-title Create new
+    .panel-body
+      .add-program
+        %a{class: 'new', 'data-toggle' => 'modal', 'data-target' => '#newProgramModal'} +
+
+.modal.fade#newProgramModal
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss' => 'modal', 'aria-label' => 'Close'}
+          %span{'aria-hidden' => 'true'} &times;
+        %h4.modal-title= "New #{@resource_name.to_s}"
+      .modal-body
+        = simple_form_for @resource_name, url: @resource_path do |f|
+          = f.input :title, class: 'form-control', placeholder: "#{@resource_name.to_s.titleize} title"
+          - if @resource_name == :metric
+            = f.hidden_field :program_id, value: params[:id]
+          = f.button :submit, "Create #{@resource_name.to_s}", class: 'btn btn-default'
+      .modal-footer
+        %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

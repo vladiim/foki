@@ -12,15 +12,23 @@
 
 # Functionality
 
-* Program CRUD
-
-* KPI CRUD
+* Metrics CRUD
 
     - Data upload
+
+    - Show # of projects for metric
+
+* Projects CRUD
+
+    - Add project to metric (ideas)
+
+    - Metric as tag for project?
 
 * Traction graph
 
     - Add metric
+
+    - Last 10 days, date range
 
 * Data integrations
 

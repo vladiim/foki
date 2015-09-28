@@ -1,5 +1,8 @@
 %header
-  %h1= "#{@program.title.titleize} traction graph"
+  %h1
+    = @program.title.titleize
+    %a{href: '#'} 7 day
+    traction graph
 
 %section#traction-graph
 
@@ -7,11 +10,13 @@
 
 %section
   %header
-    %h2 KPIs
+    %h2
+      %a{href: '#'} Weekly
+      metrics
+      %span.badge 6
 
   %section.row.kpis
-    = render partial: 'shared/panel', collection: @kpis
-
-%hr
+    = render partial: 'shared/panel', collection: @metrics
+    = render partial: 'metrics/new'
 
 = render partial: 'projects/modal'

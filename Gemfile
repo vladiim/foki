@@ -32,9 +32,6 @@ gem 'devise', '~> 3.5.2'
 gem 'puma', '~> 2.6.0'
 gem 'rails_12factor', group: :production
 
-# ------ # SECURITY # ------ #
-gem 'strong_parameters', '~> 0.1.4'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
