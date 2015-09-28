@@ -15,6 +15,6 @@
   - if user_signed_in?
     = render partial: 'layouts/nav'
 
-  = render partial: 'layouts/flash'
   .container
+    = render partial: 'layouts/flash'
     = yield

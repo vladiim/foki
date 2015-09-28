@@ -1,7 +1,13 @@
 class MetricsController < ApplicationController
   def create
     @metric = Metric.new(metric_params)
-    @metric.save ? redirect_to_program : render_program_index
+    @metric.save ? redirect_to_program('New metric created.') : render_program_index('creating the new metric')
+  end
+
+  def update
+    file = params[:metric][:data].tempfile
+    metric = MetricUpdater.new(params[:id])
+    metric.save_data(file) ? redirect_to_program('Data added.') : render_index('uploading the data')
   end
 
   def destroy
@@ -12,14 +18,14 @@ class MetricsController < ApplicationController
 
   private
 
-  def render_index
+  def render_index(message)
     render 'program#index'
-    flash[:danger] = "There was an issue creating the new metric."
+    flash[:danger] = "There was an issue #{message}."
   end
 
-  def redirect_to_program
+  def redirect_to_program(message)
     redirect_to program_path(params[:metric][:program_id])
-    flash[:success] = "New metric created."
+    flash[:success] = message
   end
 
   def metric_params

@@ -9,3 +9,7 @@
     }
   }
 }
+
+.alert-alert {
+  @extend .alert-info;
+}
