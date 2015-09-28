@@ -13,7 +13,7 @@
     %h2
       %a{href: '#'} Weekly
       metrics
-      %span.badge 6
+      %span.badge= @metrics.length
 
   %section.row.kpis
     = render partial: 'shared/panel', collection: @metrics

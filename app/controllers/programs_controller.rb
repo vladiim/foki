@@ -26,7 +26,7 @@ class ProgramsController < ApplicationController
 
   def render_index
     render 'index'
-    flash[:error] = "There was an issue creating the new program."
+    flash[:danger] = "There was an issue creating the new program."
   end
 
   def redirect_to_program(program)

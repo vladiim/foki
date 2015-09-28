@@ -3,7 +3,7 @@
     %header.panel-heading
       %h3.panel-title= panel.title
       .pull-right.dropdown.settings
-        %span{class: 'glyphicon glyphicon-cog', 'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => '#settingsModal'}
+        %span{class: 'glyphicon glyphicon-cog', 'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => "#settingsModal#{panel.id}"}
     .panel-body
       .col-xs-7
         %p.stat 32%
@@ -15,22 +15,22 @@
       .panel-footer
         = link_to 'View program', program_path(panel), class: 'btn wide btn-default'
 
-.modal.fade#settingsModal
+.modal.fade{id: "settingsModal#{panel.id}"}
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %button{type: 'button', class: 'close', 'data-dismiss' => 'modal', 'aria-label' => 'Close'}
           %span{'aria-hidden' => 'true'} &times;
-        %h4.modal-title Settings
+        %h4.modal-title= "#{panel.title} settings"
       .modal-body
         %form
           .form-group
             %label Title
-            %input{type: 'text', class: 'form-control', placeholder: 'Current title'}
+            %input{type: 'text', class: 'form-control', value: "#{panel.title}"}
           .form-group
             %label Upload data
             %button.btn.btn-default{href: '#'} Select CSV file
         %hr
-        = link_to 'Delete permanantly', panel,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        = link_to 'Delete permanantly', send("#{panel.class.name.downcase}_path".to_sym, id: panel.id, page_id: params[:id]),  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
       .modal-footer
         %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

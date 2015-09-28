@@ -4,11 +4,17 @@ class MetricsController < ApplicationController
     @metric.save ? redirect_to_program : render_program_index
   end
 
+  def destroy
+    Metric.find(params[:id]).destroy
+    redirect_to program_path(params[:page_id])
+    flash[:success] = "Metric deleted."
+  end
+
   private
 
   def render_index
     render 'program#index'
-    flash[:error] = "There was an issue creating the new metric."
+    flash[:danger] = "There was an issue creating the new metric."
   end
 
   def redirect_to_program
