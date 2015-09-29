@@ -1,10 +1,20 @@
-%header
-  %h1
-    = @program.title.titleize
-    %a{href: '#'} 7 day
-    traction graph
+%section.traction-graph
+  %header
+    %h1
+      = @program.title.titleize
+      %a{href: '#'} 7 day
+      traction graph
 
-%section#traction-graph
+  .focus-metric
+    %b Focus metric:&nbsp;
+    .dropdown.metric
+      %a{href: '#', 'data-toggle' => 'dropdown'} Current metric
+      %ul.dropdown-menu
+        - @metrics.each do |metric|
+          %li
+            %a{href: '#', class: 'metric-selector', 'data-metricId' => metric.id, 'data-programId' => params[:id]}= metric.title
+
+  %section#traction-graph
 
 %hr
 

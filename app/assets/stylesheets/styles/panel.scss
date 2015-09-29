@@ -14,14 +14,6 @@
     display: block;
     text-align: right;
     margin: 10px -15px;
-
-    // &.positive {
-    //   color: $positive-change;
-    // }
-    //
-    // &.negative {
-    //   color: $negative-change;
-    // }
   }
 
   .details {
@@ -37,8 +29,4 @@
       cursor: pointer;
     }
   }
-}
-
-.dropdown.title {
-  display: inline-block;
 }

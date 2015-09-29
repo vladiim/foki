@@ -12,17 +12,11 @@
 
 # Functionality
 
-* Data
-
-    - Weekly, daily, monthly, annual metrics
-
-* Metric
-
-    - Can only update data, not title
-
 * Traction graph
 
-    - Add metric
+    - Change focus metric through ajax: http://www.gotealeaf.com/blog/the-detailed-guide-on-how-ajax-works-with-ruby-on-rails
+
+    - Add focus metric, note - do as json object (can keep track of focus metric dates)
 
     - Last 10 days, date range
 
@@ -31,6 +25,20 @@
     - Add project to metric (ideas)
 
     - Metric as tag for project?
+
+* Metric
+
+    - View historic
+
+* Program list
+
+    - Should show daily traction movement
+
+* Testing
+
+    - BDD
+
+    - Javascript tests
 
 * Data integrations
 

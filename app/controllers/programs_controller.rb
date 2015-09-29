@@ -13,6 +13,7 @@ class ProgramsController < ApplicationController
   end
 
   def update
+    byebug
     @program = current_user.program(params[:id])
     @program.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
   end

@@ -5,9 +5,11 @@ class MetricsController < ApplicationController
   end
 
   def update
-    file = params[:metric][:data].tempfile
-    metric = MetricUpdater.new(params[:id])
-    metric.save_data(file) ? redirect_to_program('Data added.') : render_index('uploading the data')
+    update     = metric_params
+    file       = update.delete('data')
+    data_saved = upload_data(file) if file
+    metric     = Metric.find(params[:id])
+    metric.update(update) ? redirect_to_program('Metric updated.') : render_index('updating the metric.')
   end
 
   def destroy
@@ -17,6 +19,11 @@ class MetricsController < ApplicationController
   end
 
   private
+
+  def upload_data(file)
+    metric = MetricUpdater.new(params[:id])
+    metric.save_data(file.tempfile)
+  end
 
   def render_index(message)
     render 'program#index'
@@ -29,6 +36,6 @@ class MetricsController < ApplicationController
   end
 
   def metric_params
-    params[:metric].permit(:title, :program_id)
+    params[:metric].permit(:title, :program_id, :data)
   end
 end

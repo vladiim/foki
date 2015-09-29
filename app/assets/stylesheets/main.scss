@@ -2,12 +2,13 @@
 @import "base/mixins";
 @import "base/variables";
 
+// Bootstrap
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 // Styles
 @import "styles/global";
 @import "styles/nav";
 @import "styles/panel";
 @import "styles/traction_graph";
-
-// Bootstrap
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "styles/program";

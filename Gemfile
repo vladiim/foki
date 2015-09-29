@@ -16,6 +16,8 @@ gem 'simple_form', '~> 3.2.0'
 gem 'd3-rails', '~> 3.5.6'
 gem 'underscore-rails', '~> 1.8.3'
 
+gem 'rename'
+
 # ------ # API # ------ #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
