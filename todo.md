@@ -12,12 +12,6 @@
 
 # Functionality
 
-* Metrics CRUD
-
-    - Data upload
-
-    - Show # of projects for metric
-
 * Projects CRUD
 
     - Add project to metric (ideas)

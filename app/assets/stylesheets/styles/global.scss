@@ -13,3 +13,11 @@
 .alert-alert {
   @extend .alert-info;
 }
+
+.alert-notice {
+  @extend .alert-success;
+}
+
+.homejumbo {
+  margin-top: 30px;
+}

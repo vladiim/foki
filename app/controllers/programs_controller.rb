@@ -12,9 +12,14 @@ class ProgramsController < ApplicationController
     set_metric_resource
   end
 
+  def update
+    @program = current_user.program(params[:id])
+    @program.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
+  end
+
   def create
     @program = current_user.programs.build(program_params)
-    @program.save ? redirect_to_program(@program) : render_index
+    @program.save ? redirect_to_program(@program, "New program '#{@program.title}' created.") : render_index('creating the new program')
   end
 
   def destroy
@@ -24,14 +29,14 @@ class ProgramsController < ApplicationController
 
   private
 
-  def render_index
+  def render_index(message)
     render 'index'
-    flash[:danger] = "There was an issue creating the new program."
+    flash[:danger] = "There was an issue #{message}."
   end
 
-  def redirect_to_program(program)
+  def redirect_to_program(program, message)
     redirect_to program
-    flash[:success] = "New program '#{program.title}' created."
+    flash[:success] = message
   end
 
   def set_resource
