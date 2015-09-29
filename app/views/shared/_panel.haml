@@ -1,16 +1,21 @@
-%article.col-sm-4.project
+%article.col-sm-4.stat-summary{id: "#{panel.title.downcase.gsub(' ', '-')}-#{panel.id}"}
   .panel.panel-default
     %header.panel-heading
       %h3.panel-title= panel.title
       .pull-right.dropdown.settings
         %span{class: 'glyphicon glyphicon-cog', 'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => "#settingsModal#{panel.id}"}
+
     .panel-body
       .col-xs-7
-        %p.stat 32%
+        - if defined?(panel.data)
+          %p{'data-metrics' => "#{panel.data}", class: 'stat'} NA
+        - else
+          %p{class: 'stat'} NA
       .col-xs-5
-        %small.change.positive
-          2%
-          %span.details daily change
+        %small
+          .change.positive
+            NA
+          %span.details change
     - if panel.class.to_s == 'Program'
       .panel-footer
         = link_to 'View program', program_path(panel), class: 'btn wide btn-default'
@@ -33,16 +38,13 @@
         %b Data format
         %table.table.table-striped
           %tr
-            %th Column name
             %th Data type
             %th Example
           %tr
-            %td date
             %td Date (%Y-%m-%d)
             %td 2015-12-30
           %tr
-            %td value
-            %td Integer or float
+            %td Value: integer or float
             %td 1 or 1.0
       .modal-footer
         = link_to 'Delete permanantly', send("#{panel.class.name.downcase}_path".to_sym, id: panel.id, page_id: params[:id]),  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-left'

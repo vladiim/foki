@@ -3,7 +3,7 @@ require_relative '../../app/models/metric_updater'
 
 RSpec.describe MetricUpdater do
   let(:subject)     { described_class.new(1, ds_class) }
-  let(:json)        { "{\"date\":\"value\",\"2015-09-01\":\"30\"}" }
+  let(:json)        { ["{\"date\":\"2015-09-01\",\"value\":\"30\"}","{\"date\":\"2015-09-02\",\"value\":\"35\"}"] }
   let(:file)        { File.open("#{Dir.pwd}/spec/stubs/data.csv", 'rb') }
   let(:ds_class)    { spy('Data store class') }
   let(:ds_instance) { double('Data store instance') }

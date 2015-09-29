@@ -15,7 +15,7 @@ class MetricUpdater
   private
 
   def csv_to_json(file)
-    csv = CSV.read(file, headers: true)
-    csv.to_a.to_h.to_json
+    csv = CSV.read(file, headers: true, write_headers: true)
+    csv.map { |item| item.to_h.to_json }
   end
 end

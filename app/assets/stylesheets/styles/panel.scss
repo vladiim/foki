@@ -10,18 +10,22 @@
     text-align: center;
   }
 
-  .change {
+  .change, .details {
     display: block;
     text-align: right;
     margin: 10px -15px;
 
-    &.positive {
-      color: $positive-change;
-    }
+    // &.positive {
+    //   color: $positive-change;
+    // }
+    //
+    // &.negative {
+    //   color: $negative-change;
+    // }
+  }
 
-    &.negative {
-      color: $negative-change;
-    }
+  .details {
+    margin-top: -10px;
   }
 
   .add-program {
@@ -33,4 +37,8 @@
       cursor: pointer;
     }
   }
+}
+
+.dropdown.title {
+  display: inline-block;
 }

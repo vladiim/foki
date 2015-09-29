@@ -11,7 +11,15 @@
 %section
   %header
     %h2
-      %a{href: '#'} Weekly
+      .dropdown.title
+        %a{href: '#', 'data-toggle' => 'dropdown', id: 'dropdown-title'} Daily
+        %ul.dropdown-menu
+          %li
+            %a{href: '#', 'data-days' => 1, class: 'time-selecter'} Daily
+          %li
+            %a{href: '#', 'data-days' => 7, class: 'time-selecter'} Weekly
+          %li
+            %a{href: '#', 'data-days' => 30, class: 'time-selecter'} Monthly
       metrics
       %span.badge= @metrics.length
 

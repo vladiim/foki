@@ -12,17 +12,25 @@
 
 # Functionality
 
-* Projects CRUD
+* Data
 
-    - Add project to metric (ideas)
+    - Weekly, daily, monthly, annual metrics
 
-    - Metric as tag for project?
+* Metric
+
+    - Can only update data, not title
 
 * Traction graph
 
     - Add metric
 
     - Last 10 days, date range
+
+* Projects CRUD
+
+    - Add project to metric (ideas)
+
+    - Metric as tag for project?
 
 * Data integrations
 
