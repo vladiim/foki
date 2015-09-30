@@ -16,8 +16,6 @@ gem 'simple_form', '~> 3.2.0'
 gem 'd3-rails', '~> 3.5.6'
 gem 'underscore-rails', '~> 1.8.3'
 
-gem 'rename'
-
 # ------ # API # ------ #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -37,6 +35,10 @@ gem 'rails_12factor', group: :production
 # ------ # TEST # ------ #
 group :development, :test do
   gem 'rspec-rails', '~> 3.3.3'
+  gem 'guard-rspec', require: false
+  # gem 'factory_girl', '~> 4.5.0'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'database_cleaner', '~> 1.5.0'
 end
 
 # ------ # DEVELOPMENT HELPERS # ------ #

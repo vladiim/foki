@@ -12,6 +12,8 @@
 
 # Functionality
 
+* All add, update, delete actions through Ajax: http://www.gotealeaf.com/blog/the-detailed-guide-on-how-ajax-works-with-ruby-on-rails
+
 * Traction graph
 
     - Change focus metric through ajax: http://www.gotealeaf.com/blog/the-detailed-guide-on-how-ajax-works-with-ruby-on-rails

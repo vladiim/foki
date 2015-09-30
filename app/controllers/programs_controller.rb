@@ -1,6 +1,7 @@
 class ProgramsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_resource, except: :show
+  before_action :set_resource, except: :show
+  respond_to :html, :js
 
   def index
     @programs = current_user.programs
@@ -13,9 +14,9 @@ class ProgramsController < ApplicationController
   end
 
   def update
-    byebug
     @program = current_user.program(params[:id])
-    @program.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
+    updater  = ProgramUpdater.new(@program)
+    updater.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
   end
 
   def create
@@ -51,6 +52,6 @@ class ProgramsController < ApplicationController
   end
 
   def program_params
-    params[:program].permit(:title)
+    params[:program].permit(:title, :focus_metric)
   end
 end
