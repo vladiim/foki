@@ -11,14 +11,24 @@ class Program < ActiveRecord::Base
     save
   end
 
+  def latest_metric
+    return focus_metric if focus_metric.nil?
+    focus_metric.flatten.sort_by do |item|
+      Date.strptime(item.fetch('date'), '%Y-%m-%d')
+    end.last.fetch('focus_metric')
+  end
+
+  def latest_metric_title
+    metric_id = latest_metric
+    metrics.all.each do |metric|
+      metric.id == metric_id
+    end.first.title if metric_id
+  end
+
   private
 
-  # def focus_metric?
-  #
-  # end
-
   def merge_focus_metric
-    self.focus_metric = self.focus_metric.merge(updated_focus_metric)
+    self.focus_metric = [self.focus_metric, updated_focus_metric].flatten
   end
 
   def create_focus_metric

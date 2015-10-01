@@ -6,7 +6,8 @@ class ProgramUpdater
 
   def update(params)
     focus_metric = params.delete(:focus_metric)
-    program.update_focus_metric(focus_metric) if focus_metric
-    program.update(params) unless params.empty?
+    result = program.update_focus_metric(focus_metric) if focus_metric
+    result = program.update(params) unless params.empty?
+    result
   end
 end

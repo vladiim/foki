@@ -15,8 +15,8 @@ class ProgramsController < ApplicationController
 
   def update
     @program = current_user.program(params[:id])
-    updater  = ProgramUpdater.new(@program)
-    updater.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
+    @updater = ProgramUpdater.new(@program)
+    @updater.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
   end
 
   def create
@@ -37,8 +37,13 @@ class ProgramsController < ApplicationController
   end
 
   def redirect_to_program(program, message)
-    redirect_to program
-    flash[:success] = message
+    respond_to do |format|
+      format.html do
+        redirect_to program
+        flash[:success] = message
+      end
+      format.js {}
+    end
   end
 
   def set_resource
@@ -52,6 +57,6 @@ class ProgramsController < ApplicationController
   end
 
   def program_params
-    params[:program].permit(:title, :focus_metric)
+    params.require(:program).permit(:title, :focus_metric)
   end
 end

@@ -36,6 +36,6 @@ class MetricsController < ApplicationController
   end
 
   def metric_params
-    params[:metric].permit(:title, :program_id, :data)
+    params.require(:metric).permit(:title, :program_id, :data)
   end
 end

@@ -26,4 +26,42 @@ RSpec.describe Program, type: :model do
       end
     end
   end
+
+  describe 'focus metric' do
+    let(:fmetric) { [{"date"=>"2015-10-01", "focus_metric"=>"LATEST METRIC"}, {"date"=>"2015-09-01", "focus_metric"=>"EARLIEST"}] }
+    before { allow(subject).to receive(:focus_metric) { fmetric } }
+
+    describe '#latest_metric' do
+      let(:result) { subject.latest_metric }
+
+      context 'with focus_metric' do
+        it 'returns the latest metric' do
+          expect(result).to eql('LATEST METRIC')
+        end
+      end
+
+      context 'with no focus_metric' do
+        let(:fmetric) { nil }
+
+        it 'returns nil' do
+          expect(result).to eql(nil)
+        end
+      end
+    end
+
+    describe '#latest_metric_title' do
+      let(:result)  { subject.latest_metric_title }
+      let(:query)   { double('Metrics.all query' )}
+      let(:metrics) { [OpenStruct.new(title: 'TITLE', id: 'LATEST METRIC')]}
+
+      before do
+        allow(subject).to receive(:metrics) { query }
+        allow(query).to receive(:all) { metrics }
+      end
+
+      it 'returns the latest metric title' do
+        expect(result).to eql('TITLE')
+      end
+    end
+  end
 end
