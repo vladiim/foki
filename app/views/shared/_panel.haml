@@ -47,5 +47,6 @@
             %td Value: integer or float
             %td 1 or 1.0
       .modal-footer
-        = link_to 'Delete permanantly', send("#{panel.class.name.downcase}_path".to_sym, id: panel.id, page_id: params[:id]),  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-left'
+        = link_to 'Delete permanantly', send("#{panel.class.name.downcase}_path".to_sym, id: panel.id, program_id: @program.id),
+          method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-left'
         %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

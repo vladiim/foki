@@ -5,16 +5,7 @@
       %a{href: '#'} 7 day
       traction graph
 
-  .focus-metric
-    %b Focus metric:&nbsp;
-    .dropdown.metric
-      %a{href: '#', 'data-toggle' => 'dropdown'} Current metric
-      %ul.dropdown-menu
-        - @metrics.each do |metric|
-          -# %li
-          -#   %a{href: '#', class: 'metric-selector', 'data-metricId' => metric.id, 'data-programId' => params[:id]}= metric.title
-          %li
-            = link_to metric.title, program_path(params[:id], program: {focus_metric: metric.id}), method: 'put', remote: true
+  = render partial: 'focus_metric'
 
   %section#traction-graph
 
@@ -35,7 +26,7 @@
       metrics
       %span.badge= @metrics.length
 
-  %section.row.kpis
+  %section.row#metrics
     = render partial: 'shared/panel', collection: @metrics
     = render partial: 'metrics/new'
 

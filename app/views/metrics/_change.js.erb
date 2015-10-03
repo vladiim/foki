@@ -1,0 +1,12 @@
+METRICS_ID = '#metrics';
+FOCUS_ID   = '#focus-metric';
+
+$(MODAL_ID).modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
+$(METRICS_ID).html("<%= j (render partial: 'shared/panel', collection: @program.metrics) %>");
+$(METRICS_ID).append("<%= j (render partial: 'metrics/new') %>");
+$(FOCUS_ID).html("<%= j (render partial: 'programs/focus_metric') %>");
+
+showStats();

@@ -42,7 +42,7 @@ class ProgramsController < ApplicationController
         redirect_to program
         flash[:success] = message
       end
-      format.js {}
+      format.js { @program = program }
     end
   end
 

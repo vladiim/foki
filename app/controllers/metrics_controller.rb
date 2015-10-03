@@ -1,5 +1,9 @@
 class MetricsController < ApplicationController
+  before_filter :authenticate_user!
+  respond_to :html, :js
+
   def create
+    set_metric_resource
     @metric = Metric.new(metric_params)
     @metric.save ? redirect_to_program('New metric created.') : render_program_index('creating the new metric')
   end
@@ -13,9 +17,16 @@ class MetricsController < ApplicationController
   end
 
   def destroy
-    Metric.find(params[:id]).destroy
-    redirect_to program_path(params[:page_id])
-    flash[:success] = "Metric deleted."
+    @metric_id = params[:id]
+    @program   = Program.find(params[:program_id])
+    Metric.find(@metric_id).destroy
+    respond_to do |format|
+      format.html do
+        redirect_to program_path(@program)
+        flash[:success] = "Metric deleted."
+      end
+      format.js { set_metric_resource }
+    end
   end
 
   private
@@ -31,8 +42,19 @@ class MetricsController < ApplicationController
   end
 
   def redirect_to_program(message)
-    redirect_to program_path(params[:metric][:program_id])
-    flash[:success] = message
+    program_id = params[:metric][:program_id]
+    respond_to do |format|
+      format.html do
+        redirect_to program_path(program_id)
+        flash[:success] = message
+      end
+      format.js { @program = Program.find(program_id) }
+    end
+  end
+
+  def set_metric_resource
+    @resource_name = :metric
+    @resource_path = metrics_path
   end
 
   def metric_params

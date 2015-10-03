@@ -4,6 +4,11 @@ DROPDOWN_SELECTOR = '#dropdown-title'
 STAT_SELECTOR     = '.stat'
 CHANGE_SELECTOR   = '.change'
 
+refreshStatsListener = ->
+  document.addEventListener 'refreshStats', (event) =>
+    alert('worked')
+    showStats()
+
 timeSelectorListener = ->
   $(TIME_SELECTOR).on 'click', (event) =>
     $target = $(event.target)
@@ -42,7 +47,7 @@ showStat = (article, days) ->
   $stat.text(statSum(data, 0, days))
   $change.text(percChange(data, days))
 
-showStats = (days) ->
+@showStats = (days) ->
   days           = days || 1
   $stat_articles = $(STAT_SUMMARY)
   _.each $stat_articles, (article) => showStat(article, days)
@@ -50,6 +55,7 @@ showStats = (days) ->
 activateMetricSummary = ->
   showStats()
   timeSelectorListener()
+  refreshStatsListener()
 
 $(document).ready ->
   if $(STAT_SUMMARY).length > 0 then activateMetricSummary()
