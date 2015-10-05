@@ -1,13 +1,12 @@
 %section.traction-graph
   %header
     %h1
-      = @program.title.titleize
-      %a{href: '#'} 7 day
-      traction graph
+      = "#{@program.title.titleize} traction graph"
 
-  = render partial: 'focus_metric'
+  #focus-metric
+    = render partial: 'focus_metric'
 
-  %section#traction-graph
+  %section#traction-graph{'data-focus-data' => @program.focus_data}
 
 %hr
 

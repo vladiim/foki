@@ -11,6 +11,10 @@ class Program < ActiveRecord::Base
     save
   end
 
+  def focus_data
+    FocusMetric.new(self).data
+  end
+
   def latest_metric
     return focus_metric if focus_metric.nil?
     focus_metric.flatten.sort_by do |item|

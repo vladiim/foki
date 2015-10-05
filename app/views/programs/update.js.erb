@@ -1,4 +1,2 @@
 $('.focus-metric .dropdown').removeClass('open');
-$title = $('.focus-metric .dropdown a');
-$title.text('Updating...');
-$title.text("<%= j(@program.latest_metric_title) %>");
+$('#focus-metric').html("<%= j (render 'programs/focus_metric') %>");

@@ -1,12 +1,11 @@
 - @metrics ||= @program.metrics
-#focus-metric
-  %b Focus metric:&nbsp;
-  .dropdown.metric
-    - if @metrics.length > 0
-      %a{href: '#', 'data-toggle' => 'dropdown'} Current metric
-      %ul.dropdown-menu
-        - @metrics.each do |metric|
-          %li
-            = link_to metric.title, program_path(@program.id, program: {focus_metric: metric.id}), method: 'put', remote: true
-    - else
-      %a{'data-toggle' => 'modal', 'data-target' => '#newModal'} Add metric
+%b Focus metric:&nbsp;
+.dropdown.metric
+  - if @metrics.length > 0
+    %a{href: '#', 'data-toggle' => 'dropdown'}= @program.latest_metric_title
+    %ul.dropdown-menu
+      - @metrics.each do |metric|
+        %li
+          = link_to metric.title, program_path(@program.id, program: {focus_metric: metric.id}), method: 'put', remote: true
+  - else
+    %a{'data-toggle' => 'modal', 'data-target' => '#newModal'} Add metric
