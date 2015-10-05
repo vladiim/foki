@@ -14,10 +14,17 @@ FactoryGirl.define do
       end
     end
 
-    trait :focus_metric_different_dates do
+    trait :deleted_focus_metric do
       after(:create) do |program|
-        metric = create(:metric, program_id: program.id)
-        program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"DIFFERENT"}]
+        metric = create(:metric, program_id: program.id + 1)
+        program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}]
+      end
+    end
+
+    trait :multiple_focus_metrics do
+      after(:create) do |program|
+        second = create(:metric, :second, program_id: program.id)
+        program.focus_metric = [{"focus_metric"=>second.id, "date"=>"2015-10-01"}, {"focus_metric"=>second.id - 1, "date"=>"2015-10-04"}]
       end
     end
   end
@@ -29,6 +36,10 @@ FactoryGirl.define do
 
     trait :no_data do
       data nil
+    end
+
+    trait :second do
+      data ["{\"date\":\"2015-10-01\",\"value\":\"1\"}", "{\"date\":\"2015-10-02\",\"value\":\"2\"}", "{\"date\":\"2015-10-03\",\"value\":\"3\"}"]
     end
   end
 end

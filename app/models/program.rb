@@ -17,9 +17,13 @@ class Program < ActiveRecord::Base
 
   def latest_metric
     return focus_metric if focus_metric.nil?
+    ordered_metrics.last.fetch('focus_metric')
+  end
+
+  def ordered_metrics
     focus_metric.flatten.sort_by do |item|
       Date.strptime(item.fetch('date'), '%Y-%m-%d')
-    end.last.fetch('focus_metric')
+    end
   end
 
   def latest_metric_title
