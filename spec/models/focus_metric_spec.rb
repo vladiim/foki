@@ -22,16 +22,16 @@ RSpec.describe FocusMetric do
     end
 
     context 'with program focus data' do
-      let(:data) { [{"date"=>"2015-10-04", "value"=>"1"}] }
+      let(:data) { [{"date"=>"2015-10-04", "value"=>"1"}, {"date"=>"2015-10-05", "value"=>"2"}] }
 
       it 'returns the relevant data within the timeframe' do
         expect(result).to eql(data)
       end
     end
 
-   context 'with multiple focus metrics' do
+   context 'with multiple focus metrics', focus: true do
      let(:program) { create :program, :multiple_focus_metrics }
-     let(:data) { [{"date"=>"2015-10-01", "value"=>"1"},{"date"=>"2015-10-02", "value"=>"2"},{"date"=>"2015-10-03", "value"=>"3"},{"date"=>"2015-10-04", "value"=>"1"}] }
+     let(:data) { [{"date"=>"2015-10-01", "value"=>"1"},{"date"=>"2015-10-02", "value"=>"2"},{"date"=>"2015-10-03", "value"=>"3"},{"date"=>"2015-10-04", "value"=>"1"}, {"date"=>"2015-10-05", "value"=>"2"}] }
 
      it 'gets the data for dates between focus metrics' do
        expect(result).to eql(data)

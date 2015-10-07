@@ -43,7 +43,7 @@ RSpec.describe Program, type: :model do
       context 'with no focus_metric' do
         let(:fmetric) { nil }
 
-        it 'returns nil' do
+        it 'returns no focus metric' do
           expect(result).to eql(nil)
         end
       end
@@ -59,8 +59,17 @@ RSpec.describe Program, type: :model do
         allow(query).to receive(:all) { metrics }
       end
 
-      it 'returns the latest metric title' do
-        expect(result).to eql('TITLE')
+      context 'with focus metric' do
+        it 'returns the latest metric title' do
+          expect(result).to eql('TITLE')
+        end
+      end
+
+      context 'without focus metric' do
+        let(:fmetric) { nil }
+        it 'returns no focus metric' do
+          expect(result).to eql('No focus metric')
+        end
       end
     end
   end

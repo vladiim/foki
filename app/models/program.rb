@@ -16,7 +16,7 @@ class Program < ActiveRecord::Base
   end
 
   def latest_metric
-    return focus_metric if focus_metric.nil?
+    return if focus_metric.nil?
     ordered_metrics.last.fetch('focus_metric')
   end
 
@@ -28,9 +28,9 @@ class Program < ActiveRecord::Base
 
   def latest_metric_title
     metric_id = latest_metric
-    metrics.all.each do |metric|
-      metric.id == metric_id
-    end.first.title if metric_id
+    return 'No focus metric' unless metric_id
+    metrics.all.each { |m| m.id == metric_id }.
+      first.title
   end
 
   private
