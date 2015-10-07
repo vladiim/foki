@@ -1,0 +1,9 @@
+PROGRAMS_ID = '#programs';
+MODAL_ID = '#newModal';
+
+$(MODAL_ID).modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
+$(PROGRAMS_ID).html("<%= j (render partial: 'shared/panel', collection: @programs) %>");
+$(PROGRAMS_ID).append("<%= j (render partial: 'programs/new') %>");

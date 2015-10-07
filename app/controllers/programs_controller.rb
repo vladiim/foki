@@ -12,20 +12,27 @@ class ProgramsController < ApplicationController
     set_metric_resource
   end
 
+  def create
+    @program = current_user.programs.build(program_params)
+    @program.save ? redirect_to_program(@program, "New program '#{@program.title}' created.") : render_index('creating the new program')
+  end
+
   def update
     @program = current_user.program_with_metrics(params[:id])
     @updater = ProgramUpdater.new(@program)
     @updater.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
   end
 
-  def create
-    @program = current_user.programs.build(program_params)
-    @program.save ? redirect_to_program(@program, "New program '#{@program.title}' created.") : render_index('creating the new program')
-  end
-
   def destroy
-    Program.find(params[:id]).destroy
-    redirect_to action: :index
+    @program_id = params[:id]
+    Program.find(@program_id).destroy
+    respond_to do |format|
+      format.html do
+        redirect_to programs_path
+        flash[:success] = "Program deleted."
+      end
+      format.js { set_resource; @programs = current_user.programs }
+    end
   end
 
   private
@@ -41,7 +48,7 @@ class ProgramsController < ApplicationController
         redirect_to program
         flash[:success] = message
       end
-      format.js { @program = program }
+      format.js { set_resource; @programs = current_user.programs }
     end
   end
 

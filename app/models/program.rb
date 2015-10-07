@@ -17,12 +17,14 @@ class Program < ActiveRecord::Base
 
   def latest_metric
     return if focus_metric.nil?
-    ordered_metrics.last.fetch('focus_metric')
+    latest_metric = JSON.parse(ordered_metrics.last)
+    latest_metric.fetch('focus_metric')
   end
 
   def ordered_metrics
     focus_metric.flatten.sort_by do |item|
-      Date.strptime(item.fetch('date'), '%Y-%m-%d')
+      parsed_item = JSON.parse(item)
+      Date.strptime(parsed_item.fetch('date'), '%Y-%m-%d')
     end
   end
 

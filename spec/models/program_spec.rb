@@ -28,7 +28,7 @@ RSpec.describe Program, type: :model do
   end
 
   describe 'focus metric' do
-    let(:fmetric) { [{"date"=>"2015-10-01", "focus_metric"=>"LATEST METRIC"}, {"date"=>"2015-09-01", "focus_metric"=>"EARLIEST"}] }
+    let(:fmetric) { [{"date"=>"2015-10-01", "focus_metric"=>"LATEST METRIC"}, {"date"=>"2015-09-01", "focus_metric"=>"EARLIEST"}].map {|d| d.to_json } }
     before { allow(subject).to receive(:focus_metric) { fmetric } }
 
     describe '#latest_metric' do

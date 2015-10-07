@@ -4,27 +4,27 @@ FactoryGirl.define do
     user_id 1
     after(:create) do |program|
       metric = create(:metric, program_id: program.id)
-      program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}]
+      program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}.to_json]
     end
 
     trait :no_metric_data do
       after(:create) do |program|
         metric = create(:metric, :no_data, program_id: program.id)
-        program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}]
+        program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}.to_json]
       end
     end
 
     trait :deleted_focus_metric do
       after(:create) do |program|
         metric = create(:metric, program_id: program.id + 1)
-        program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}]
+        program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}.to_json]
       end
     end
 
     trait :multiple_focus_metrics do
       after(:create) do |program|
         second = create(:metric, :second, program_id: program.id)
-        program.focus_metric = [{"focus_metric"=>second.id, "date"=>"2015-10-01"}, {"focus_metric"=>second.id - 1, "date"=>"2015-10-04"}]
+        program.focus_metric = [{"focus_metric"=>second.id, "date"=>"2015-10-01"}.to_json, {"focus_metric"=>second.id - 1, "date"=>"2015-10-04"}.to_json]
       end
     end
   end

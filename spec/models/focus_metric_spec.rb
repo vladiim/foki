@@ -49,8 +49,8 @@ RSpec.describe FocusMetric do
     context 'deleted focus metric' do
       let(:program) { create :program, :deleted_focus_metric }
 
-      it 'returns an empty array' do
-        expect(result).to eql([])
+      it 'returns an empty hash' do
+        expect(result).to eql([{}])
       end
     end
   end

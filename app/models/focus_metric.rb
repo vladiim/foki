@@ -15,9 +15,10 @@ class FocusMetric
   def process_metrics(ordered_metrics)
     data = []
     until ordered_metrics.empty? do
-      focus_metric            = ordered_metrics.shift
+      focus_metric            = JSON.parse(ordered_metrics.shift)
       next_metric             = ordered_metrics[0] || today_metric
-      focus_metric['to_date'] = format_date(next_metric.fetch('date')) -1
+      to_date                 = JSON.parse(next_metric).fetch('date')
+      focus_metric['to_date'] = format_date(to_date) -1
       data << process_metric(focus_metric)
     end
     data.flatten
@@ -32,35 +33,28 @@ class FocusMetric
   def get_metric_data(focus_metric)
     focus_id = focus_metric.fetch('focus_metric').to_i
     focus_metric = program.metrics.select { |m| m.id == focus_id }.first
-    return {} unless focus_metric
-    focus_metric.data
+    return {} unless focus_metric && focus_metric.data
+    focus_metric.data.map { |d| JSON.parse(d) }
   end
 
   def get_data(focus_metric, metric_data)
     from_date = format_date(focus_metric.fetch('date'))
     to_date   = focus_metric.fetch('to_date')
-    raw_data  = get_raw_data(metric_data,from_date, to_date)
-    return {} unless raw_data
-    process_data(raw_data)
+    data      = filter_metric_data(metric_data, from_date, to_date)
+    return {} unless data
+    data
   end
 
-  def get_raw_data(metric_data,from_date, to_date)
+  def filter_metric_data(metric_data, from_date, to_date)
     metric_data.select do |m|
-      date = format_date(JSON.parse(m).fetch('date'))
+      date = format_date(m.fetch('date'))
       (from_date..to_date).cover?(date)
-    end
-  end
-
-  def process_data(raw_data)
-    processed_data = raw_data.map { |d| JSON.parse(d) }
-    processed_data.map do |data|
-      { 'date' => data.fetch('date'), 'value' => data.fetch('value') }
     end
   end
 
   def today_metric
     today = Date.today
-    {'date'=>"#{today.year}-#{today.month}-#{today.day}"}
+    {'date'=>"#{today.year}-#{today.month}-#{today.day}"}.to_json
   end
 
   def format_date(date)
