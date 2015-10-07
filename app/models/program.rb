@@ -12,7 +12,7 @@ class Program < ActiveRecord::Base
   end
 
   def focus_data
-    FocusMetric.new(self).data
+    FocusMetric.new(self).json_data
   end
 
   def latest_metric

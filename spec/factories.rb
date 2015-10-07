@@ -39,6 +39,7 @@ FactoryGirl.define do
     end
 
     trait :second do
+      title 'SECOND_METRIC_TITLE'
       data ["{\"date\":\"2015-10-01\",\"value\":\"1\"}", "{\"date\":\"2015-10-02\",\"value\":\"2\"}", "{\"date\":\"2015-10-03\",\"value\":\"3\"}"]
     end
   end

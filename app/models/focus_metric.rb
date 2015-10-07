@@ -4,13 +4,17 @@ class FocusMetric
     @program = program
   end
 
+  def json_data
+    data.map { |d| d.to_json }
+  end
+
+  private
+
   def data
     return {} if program.focus_metric.nil?
     ordered_metrics = program.ordered_metrics.dup
     process_metrics(ordered_metrics).flatten
   end
-
-  private
 
   def process_metrics(ordered_metrics)
     data = []

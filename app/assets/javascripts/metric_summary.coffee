@@ -29,8 +29,8 @@ percChange = (data, days) ->
   if isNaN(prev) then 'Missing data' else res
 
 formatDataItem = (item) ->
-  item = JSON.parse(item)
-  item.date = new Date(item.date)
+  item       = JSON.parse(item)
+  item.date  = new Date(item.date)
   item.value = parseFloat(item.value)
   item
 
