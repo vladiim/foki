@@ -8,8 +8,7 @@ getData = ->
   chart = $(CHART_SELECTOR)
   parseData(chart.data(DATA_SELECTOR))
 
-parseData = (data) ->
-  _.map data, (d) -> JSON.parse d
+parseData = (data) -> _.map data, (d) -> JSON.parse d
 
 createChart = (data) ->
   width = parseInt($(CHART_SELECTOR).css('width'), 10)
@@ -26,7 +25,7 @@ addXAxis = (chart) ->
   x
 
 rotateXAxis = (x) ->
-  x.shapes.selectAll('text').attr 'transform', 'translate(-80, 50) rotate(-45)'
+  x.shapes.selectAll('text').attr 'transform', 'translate(-30, 20) rotate(-35)'
 
 addYAxis = (chart) ->
   y            = chart.addMeasureAxis('y', Y_AXIS)
@@ -58,7 +57,6 @@ addInteractiveLegends = (legend) ->
 # Latest period only
 # dimple.filterData(data, "Date", "01/12/2012");
 
-# makeGraph = (error, data) ->
 makeGraph = ->
   data   = getData()
   chart  = createChart(data)
@@ -72,6 +70,3 @@ makeGraph = ->
 
 $(document).ready ->
   if $(CHART_SELECTOR).length > 0 then makeGraph()
-    # queue()
-    #   .defer(d3.json, '/data.json')
-    #   .await(makeGraph)

@@ -6,39 +6,38 @@ class FocusMetric
 
   def json_data
     data.map { |d| d.to_json }
-    # data
   end
 
   private
 
-  # should get day before metric focus day so can get
-  # change value for metric from start of focus
   def data
     return {} if program.focus_metric.nil?
     ordered_metrics = program.ordered_metrics.dup
-    result = process_metrics(ordered_metrics)
+    metrics         = process_metrics(ordered_metrics)
+    calculate_each_change(metrics)
+  end
 
-    # split by metric section
-
-    result.each.inject([]) do |final_array, focus_array|
-
-      final_array << focus_array.each_with_index.inject([]) do |res, (today, index)|
-        tomorrow = focus_array[index + 1]
-        if tomorrow
-          tom_val  = tomorrow.fetch('value').to_f
-          tod_val  = today.fetch('value').to_f
-          tomorrow = tomorrow.merge(change: (tom_val - tod_val) / tod_val)
-          res << tomorrow
-        end
-        res
-      end
-
-      final_array
-
+  def calculate_each_change(metrics)
+    metrics.each.inject([]) do |result, metrics_section|
+      result << calculate_section_change(metrics_section)
     end.flatten
   end
 
-  # make ordered metrics an object?
+  def calculate_section_change(metrics)
+    metrics.each_with_index.inject([]) do |metric, (today, index)|
+      tomorrow = metrics[index + 1]
+      metric << calculate_change(today, tomorrow) if tomorrow
+      metric
+    end
+  end
+
+  def calculate_change(today, tomorrow)
+    tom_val = tomorrow.fetch('value').to_f
+    tod_val = today.fetch('value').to_f
+    change  = (tom_val - tod_val) / tod_val
+    tomorrow.merge(change: change)
+  end
+
   def process_metrics(ordered_metrics)
     data = []
     until ordered_metrics.empty? do
@@ -72,7 +71,6 @@ class FocusMetric
   end
 
   def get_data(focus_metric, metric_data)
-    # from_date = format_date(focus_metric.fetch('date'))
     from_date = format_date(focus_metric.fetch('date')) - 1
     to_date   = focus_metric.fetch('to_date')
     data      = filter_metric_data(metric_data, from_date, to_date)
