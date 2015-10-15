@@ -1,0 +1,17 @@
+= simple_form_for(@item) do |f|
+  = f.text_field :title, class: 'form-control'
+  = f.hidden_field :program_id, value: params[:id]
+  = f.file_field :data
+  = f.submit 'Update', class: 'btn btn-default'
+
+%b Data format
+%table.table.table-striped
+  %tr
+    %th Data type
+    %th Example
+  %tr
+    %td Date (%Y-%m-%d)
+    %td 2015-12-30
+  %tr
+    %td Value: integer or float
+    %td 1 or 1.0

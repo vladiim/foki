@@ -11,5 +11,5 @@ changeViewListener = ->
 activateProjectsList = ->
   changeViewListener()
 
-$(document).ready ->
+$(document).on 'page:change', ->
   if $(PROJECTS_SELECTOR).length > 0 then activateProjectsList()

@@ -57,5 +57,5 @@ activateMetricSummary = ->
   timeSelectorListener()
   refreshStatsListener()
 
-$(document).ready ->
+$(document).on 'page:change', ->
   if $(STAT_SUMMARY).length > 0 then activateMetricSummary()

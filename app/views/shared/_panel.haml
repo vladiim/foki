@@ -1,15 +1,17 @@
-- @program ||= panel
-%article.col-sm-4.stat-summary{id: "#{panel.title.downcase.gsub(' ', '-')}-#{panel.id}"}
+- @item ||= panel
+- @program ||= @item
+
+%article.col-sm-4.stat-summary{id: "#{@item.title.downcase.gsub(' ', '-')}-#{@item.id}"}
   .panel.panel-default
     %header.panel-heading
-      %h3.panel-title= panel.title
+      %h3.panel-title= @item.title
       .pull-right.dropdown.settings
-        %span{class: 'glyphicon glyphicon-cog', 'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => "#settingsModal#{panel.id}"}
+        %span{class: 'glyphicon glyphicon-cog', 'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => "#settingsModal#{@item.id}"}
 
     .panel-body
       .col-xs-7
-        - if defined?(panel.data)
-          %p{'data-metrics' => "#{panel.data}", class: 'stat'} NA
+        - if defined?(@item.data)
+          %p{'data-metrics' => "#{@item.data}", class: 'stat'} NA
         - else
           %p{class: 'stat'} NA
       .col-xs-5
@@ -17,37 +19,20 @@
           .change.positive
             NA
           %span.details change
-    - if panel.class.to_s == 'Program'
-      .panel-footer
-        = link_to 'View program', program_path(panel), class: 'btn wide btn-default'
+    .panel-footer
+      = render partial: "#{@item.class.name.downcase}s/panel_footer"
 
-.modal.fade{id: "settingsModal#{panel.id}"}
+.modal.fade{id: "settingsModal#{@item.id}"}
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %button{type: 'button', class: 'close', 'data-dismiss' => 'modal', 'aria-label' => 'Close'}
           %span{'aria-hidden' => 'true'} &times;
-        %h4.modal-title= "#{panel.title} settings"
+        %h4.modal-title= "#{@item.title} settings"
       .modal-body
+        = render partial: "#{@item.class.name.downcase}s/settings_form"
 
-        = simple_form_for(panel) do |f|
-          = f.text_field :title, class: 'form-control'
-          = f.hidden_field :program_id, value: params[:id]
-          = f.file_field :data
-          = f.submit 'Update', class: 'btn btn-default'
-
-        %b Data format
-        %table.table.table-striped
-          %tr
-            %th Data type
-            %th Example
-          %tr
-            %td Date (%Y-%m-%d)
-            %td 2015-12-30
-          %tr
-            %td Value: integer or float
-            %td 1 or 1.0
       .modal-footer
-        = link_to 'Delete permanantly', send("#{panel.class.name.downcase}_path".to_sym, id: panel.id, program_id: @program.id),
+        = link_to 'Delete permanantly', send("#{@item.class.name.downcase}_path".to_sym, id: @item.id, program_id: @program.id),
           method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-left'
         %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

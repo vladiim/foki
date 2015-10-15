@@ -68,5 +68,5 @@ makeGraph = ->
   addInteractiveLegends()
   rotateXAxis(x)
 
-$(document).ready ->
+$(document).on 'page:change', ->
   if $(CHART_SELECTOR).length > 0 then makeGraph()

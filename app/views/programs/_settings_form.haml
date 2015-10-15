@@ -1,0 +1,4 @@
+= simple_form_for(@item) do |f|
+  = f.text_field :title, class: 'form-control'
+  = f.hidden_field :program_id, value: params[:id]
+  = f.submit 'Update', class: 'btn btn-default'

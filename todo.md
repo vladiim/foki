@@ -1,3 +1,25 @@
+# now
+
+* change modals for programs and metrics
+
+* load traction graph on page load
+
+* filter projects
+
+* add project description
+
+* add users to programs
+
+* email, sign up etc
+
+* project list to show last change
+
+* make traction graph from d3 and responsive
+
+* view metrics
+
+***
+
 # best practice
 
 * deployment todo list
@@ -7,6 +29,8 @@
 * loader for forms (in form button)
 
 * form validation error messages
+
+* add static code analysis, new relic, breakman (http://blog.codeship.com/preproduction-checklist-for-a-rails-app)
 
 ***
 
