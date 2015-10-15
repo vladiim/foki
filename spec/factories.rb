@@ -24,7 +24,7 @@ FactoryGirl.define do
     trait :multiple_focus_metrics do
       after(:create) do |program|
         second = create(:metric, :second, program_id: program.id)
-        program.focus_metric = [{"focus_metric"=>second.id, "date"=>"2015-10-01"}.to_json, {"focus_metric"=>second.id - 1, "date"=>"2015-10-04"}.to_json]
+        program.focus_metric = [{"focus_metric"=>second.id, "date"=>"2015-10-02"}.to_json, {"focus_metric"=>second.id - 1, "date"=>"2015-10-05"}.to_json]
       end
     end
   end
