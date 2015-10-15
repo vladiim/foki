@@ -1,12 +1,22 @@
 %section.traction-graph
   %header
-    %h1
-      = "#{@program.title.titleize} traction graph"
+    %h1= @program.title.titleize
 
-  #focus-metric
-    = render partial: 'focus_metric'
+  .row
+    .col-md-8
+      %header
+        %h3 Traction graph
 
-  %section#traction-graph{'data-focus-data' => @program.focus_data}
+
+      %section.panel.panel-default
+        .panel-heading
+          #focus-metric
+            = render partial: 'focus_metric'
+        .panel-body
+          %section#traction-graph{'data-focus-data' => @program.focus_data}
+
+    .col-md-4#projects
+      = render partial: 'projects/index'
 
 %hr
 

@@ -1,0 +1,19 @@
+.projects-focus.off {
+  display: none;
+}
+
+.change-projects-view {
+  cursor: pointer;
+}
+
+.panel-projects {
+  height: 510px;
+
+  .delete {
+    float: right;
+  }
+}
+
+.new-project {
+  margin-bottom: 179px;
+}

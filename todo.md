@@ -4,7 +4,7 @@
 
     - inc run heroku run:detached rake db:migrate
 
-* flash messages
+* loader for forms (in form button)
 
 * form validation error messages
 

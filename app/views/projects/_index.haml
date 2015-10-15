@@ -1,0 +1,30 @@
+%header
+  %h3 Projects
+
+%section.panel.panel-default.panel-projects
+  .panel-heading
+    %span.filter
+      %b Filter:
+      %a not live
+      ,
+      %a CAC
+
+  .panel-body
+    %ul.list-group.projects-focus
+      - @program.projects.each do |project|
+        %li.list-group-item
+          %span.delete= link_to 'x', send(:project_path, project.id, program_id: @program.id), method: :delete, remote: true, data: {confirm: 'Are you sure?'}
+          = project.title
+
+    .new-project.projects-focus.off
+      = simple_form_for :project, url: projects_path, remote: true do |f|
+        = f.input :title, class: 'form-control', placeholder: 'New project title'
+        = f.input :tags, collection: @program.metric_title_syms, as: :check_boxes
+        = f.hidden_field :program_id, value: @program.id
+        = f.button :submit, 'Create project', class: 'btn btn-default'
+
+  .panel-footer
+    .projects-focus.off
+      %button.btn.btn-default.change-projects-view View projects
+    .projects-focus
+      %button.btn.btn-default.change-projects-view Create new project

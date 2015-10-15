@@ -13,12 +13,12 @@ class MetricsController < ApplicationController
     file       = update.delete('data')
     data_saved = upload_data(file) if file
     metric     = Metric.find(params[:id])
-    metric.update(update) ? redirect_to_program('Metric updated.') : render_index('updating the metric.')
+    metric.update(update) ? redirect_to_program('Metric updated.') : render_program_index('updating the metric.')
   end
 
   def destroy
     @metric_id = params[:id]
-    @program   = Program.find(params[:program_id])
+    @program = current_user.program_with_children(params[:program_id])
     Metric.find(@metric_id).destroy
     respond_to do |format|
       format.html do
@@ -36,7 +36,7 @@ class MetricsController < ApplicationController
     metric.save_data(file.tempfile)
   end
 
-  def render_index(message)
+  def render_program_index(message)
     render 'program#index'
     flash[:danger] = "There was an issue #{message}."
   end
@@ -48,7 +48,7 @@ class MetricsController < ApplicationController
         redirect_to program_path(program_id)
         flash[:success] = message
       end
-      format.js { @program = Program.find(program_id) }
+      format.js { @program = current_user.program_with_children(params[program_id]) }
     end
   end
 

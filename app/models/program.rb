@@ -1,6 +1,7 @@
 class Program < ActiveRecord::Base
   belongs_to :user
   has_many :metrics, dependent: :destroy
+  has_many :projects, dependent: :destroy
 
   validates_presence_of :title
 
@@ -33,6 +34,10 @@ class Program < ActiveRecord::Base
     return 'No focus metric' unless metric_id
     metrics.all.each { |m| m.id == metric_id }.
       first.title
+  end
+
+  def metric_title_syms
+    metrics.map { |m| m.title.to_sym }
   end
 
   private

@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
       first
   end
 
-  def program_with_metrics(program_id)
-    Program.includes(:metrics).
+  def program_with_children(program_id)
+    Program.includes(:metrics, :projects).
       where(user_id: self.id, id: program_id).
       first
   end

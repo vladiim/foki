@@ -8,7 +8,7 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    @program = current_user.program_with_metrics(params[:id])
+    @program = current_user.program_with_children(params[:id])
     set_metric_resource
   end
 
@@ -18,7 +18,7 @@ class ProgramsController < ApplicationController
   end
 
   def update
-    @program = current_user.program_with_metrics(params[:id])
+    @program = current_user.program_with_children(params[:id])
     @updater = ProgramUpdater.new(@program)
     @updater.update(program_params) ? redirect_to_program(@program, "#{@program.title} updated.") : render_index('updating the program')
   end
