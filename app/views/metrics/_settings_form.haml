@@ -4,14 +4,19 @@
   = f.file_field :data
   = f.submit 'Update', class: 'btn btn-default'
 
+%hr
+
 %b Data format
 %table.table.table-striped
   %tr
+    %th Column header
     %th Data type
     %th Example
   %tr
+    %td date
     %td Date (%Y-%m-%d)
     %td 2015-12-30
   %tr
+    %td value
     %td Value: integer or float
     %td 1 or 1.0

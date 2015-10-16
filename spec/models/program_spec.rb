@@ -6,15 +6,26 @@ RSpec.describe Program, type: :model do
   describe '#update_focus_metric(focus_metric)' do
     let(:focus_metric)         { 1 }
     let(:result)               { subject.update_focus_metric(focus_metric) }
-    let(:updated_focus_metric) { {'date' => Date.today.strftime('%Y-%m-%d'), 'focus_metric' => focus_metric} }
+    let(:updated_focus_metric) { [{'date' => Date.today.strftime('%Y-%m-%d'), 'focus_metric' => focus_metric}.to_json] }
 
     before do
       allow(subject).to receive(:save) { true }
     end
 
-    it 'updates the focus_metric hash' do
+    it 'updates the focus_metric' do
       result
       expect(subject.focus_metric).to eql(updated_focus_metric)
+    end
+
+    context 'updates more than one focus metric in one day' do
+      let(:fm_two)      { 2 }
+      let(:updated_two) { [{'date' => Date.today.strftime('%Y-%m-%d'), 'focus_metric' => fm_two}.to_json] }
+      let(:result_two)  { subject.update_focus_metric(fm_two) }
+
+      it 'removes previous focus metrics from that day' do
+        result && result_two
+        expect(subject.focus_metric).to eql(updated_two)
+      end
     end
 
     context 'the focus_metric is nil' do
@@ -31,12 +42,20 @@ RSpec.describe Program, type: :model do
     let(:fmetric) { [{"date"=>"2015-10-01", "focus_metric"=>"LATEST METRIC"}, {"date"=>"2015-09-01", "focus_metric"=>"EARLIEST"}].map {|d| d.to_json } }
     before { allow(subject).to receive(:focus_metric) { fmetric } }
 
-    describe '#latest_metric' do
-      let(:result) { subject.latest_metric }
+    describe '#latest_metric_id' do
+      let(:result) { subject.latest_metric_id }
 
       context 'with focus_metric' do
         it 'returns the latest metric' do
           expect(result).to eql('LATEST METRIC')
+        end
+      end
+
+      context 'with a hash in focus_metric' do
+        let(:fmetric) { [{"date"=>"2015-10-01", "focus_metric"=>"LATEST METRIC"}, {"date"=>"2015-09-01", "focus_metric"=>"EARLIEST"}.to_json] }
+
+        it 'still works' do
+          expect(result).to be
         end
       end
 
@@ -56,7 +75,7 @@ RSpec.describe Program, type: :model do
 
       before do
         allow(subject).to receive(:metrics) { query }
-        allow(query).to receive(:all) { metrics }
+        allow(Metric).to receive(:find).with('LATEST METRIC') { metrics[0] }
       end
 
       context 'with focus metric' do

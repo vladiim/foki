@@ -1,5 +1,6 @@
 - @item ||= panel
 - @program ||= @item
+- @name = @item.class.name.downcase
 
 %article.col-sm-4.stat-summary{id: "#{@item.title.downcase.gsub(' ', '-')}-#{@item.id}"}
   .panel.panel-default
@@ -10,17 +11,14 @@
 
     .panel-body
       .col-xs-7
-        - if defined?(@item.data)
-          %p{'data-metrics' => "#{@item.data}", class: 'stat'} NA
-        - else
-          %p{class: 'stat'} NA
+        %p{'data-metrics' => "#{@item.data}", class: 'stat'} NA
       .col-xs-5
         %small
           .change.positive
             NA
           %span.details change
     .panel-footer
-      = render partial: "#{@item.class.name.downcase}s/panel_footer"
+      = render partial: "#{@name}s/panel_footer"
 
 .modal.fade{id: "settingsModal#{@item.id}"}
   .modal-dialog.modal-lg
@@ -30,9 +28,9 @@
           %span{'aria-hidden' => 'true'} &times;
         %h4.modal-title= "#{@item.title} settings"
       .modal-body
-        = render partial: "#{@item.class.name.downcase}s/settings_form"
+        = render partial: "#{@name}s/settings_form"
 
       .modal-footer
-        = link_to 'Delete permanantly', send("#{@item.class.name.downcase}_path".to_sym, id: @item.id, program_id: @program.id),
-          method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-left'
+        = link_to "Delete #{@name} permanantly", send("#{@name}_path".to_sym, id: @item.id, program_id: @program.id),
+          method: :delete, remote: true, data: { confirm: "Are you sure you want to permanantly delete all data for this #{@name}?" }, class: 'btn btn-danger pull-left'
         %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close

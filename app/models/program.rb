@@ -7,7 +7,7 @@ class Program < ActiveRecord::Base
 
   attr_reader :updated_focus_metric
   def update_focus_metric(metric_id)
-    @updated_focus_metric = { 'date' => Date.today.strftime('%Y-%m-%d'), 'focus_metric' => metric_id}
+    @updated_focus_metric = { date: Date.today.strftime('%Y-%m-%d'), focus_metric: metric_id}.to_json
     focus_metric? ? merge_focus_metric : create_focus_metric
     save
   end
@@ -16,37 +16,65 @@ class Program < ActiveRecord::Base
     FocusMetric.new(self).json_data
   end
 
-  def latest_metric
+  def latest_metric_id
     return if focus_metric.nil?
     latest_metric = JSON.parse(ordered_metrics.last)
     latest_metric.fetch('focus_metric')
   end
 
   def ordered_metrics
-    focus_metric.flatten.sort_by do |item|
-      parsed_item = JSON.parse(item)
-      Date.strptime(parsed_item.fetch('date'), '%Y-%m-%d')
+    ensure_json_metrics.flatten.sort_by do |metric|
+      parsed_metric = JSON.parse(metric)
+      Date.strptime(parsed_metric.fetch('date'), '%Y-%m-%d')
     end
   end
 
   def latest_metric_title
-    metric_id = latest_metric
-    return 'No focus metric' unless metric_id
-    metrics.all.each { |m| m.id == metric_id }.
-      first.title
+    return 'No focus metric' unless latest_metric_id
+    latest_metric.title
+  end
+
+  def data
+    return 0 unless latest_metric_id
+    latest_metric.data
   end
 
   def metric_title_syms
-    metrics.map { |m| m.title.to_sym }
+    memoised_metrics.map { |m| m.title.to_sym }
   end
 
   private
 
+  attr_reader :mem_metrics
+  def memoised_metrics
+    @mem_metrics ||= metrics
+  end
+
+  attr_reader :mem_latest_metric
+  def latest_metric
+    @mem_latest_metric ||= Metric.find(latest_metric_id)
+  end
+
+  def ensure_json_metrics
+    focus_metric.map do |metric|
+      metric.is_a?(Hash) ? metric.to_json : metric
+    end
+  end
+
   def merge_focus_metric
-    self.focus_metric = [self.focus_metric, updated_focus_metric].flatten
+    updated_date = JSON.parse(updated_focus_metric).fetch('date')
+    self.focus_metric = [
+      passed_focus_metrics(updated_date), updated_focus_metric
+    ].flatten
+  end
+
+  def passed_focus_metrics(updated_date)
+    self.focus_metric.select do |metric|
+      JSON.parse(metric).fetch('date') != updated_date
+    end
   end
 
   def create_focus_metric
-    self.focus_metric = updated_focus_metric
+    self.focus_metric = [updated_focus_metric]
   end
 end

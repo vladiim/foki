@@ -1,8 +1,6 @@
 # now
 
-* change modals for programs and metrics
-
-* load traction graph on page load
+* calculation of % change on program is wrong
 
 * filter projects
 
