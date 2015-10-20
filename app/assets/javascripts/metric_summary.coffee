@@ -23,7 +23,7 @@ statSum = (data, start, end) ->
 
 percChange = (data, days) ->
   now    = statSum(data, 0, days)
-  prev   = statSum(data, (days + 1), ((days * 2) + 1))
+  prev   = statSum(data, days, days * 2)
   change = (now - prev) / prev
   res    = "#{change.toFixed(2) * 100}%"
   if isNaN(prev) then 'Missing data' else res
@@ -39,6 +39,7 @@ getData = (stat) ->
   data    = _.map metrics, formatDataItem
   ordered = _.sortBy data, (d) => d.date
   ordered.reverse()
+  # _.sortBy data, (d) => d.date
 
 showStat = (article, days) ->
   $stat   = $(article).find(STAT_SELECTOR)

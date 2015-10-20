@@ -1,7 +1,5 @@
 # now
 
-* calculation of % change on program is wrong
-
 * filter projects
 
 * add project description
