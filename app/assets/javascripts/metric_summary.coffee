@@ -39,7 +39,6 @@ getData = (stat) ->
   data    = _.map metrics, formatDataItem
   ordered = _.sortBy data, (d) => d.date
   ordered.reverse()
-  # _.sortBy data, (d) => d.date
 
 showStat = (article, days) ->
   $stat   = $(article).find(STAT_SELECTOR)

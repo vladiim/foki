@@ -2,6 +2,16 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :js
 
+  def index
+    @program       = Program.find(index_params[:program_id])
+    @projects      = ProjectFilter.new(@program, index_params).process
+    @metric_filter = index_params[:metric]
+    @status_filter = index_params[:status]
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   def create
     @program = current_user.program_with_children(project_params[:program_id])
     @project = @program.projects.build(project_params)
@@ -35,6 +45,10 @@ class ProjectsController < ApplicationController
       end
       format.js {}
     end
+  end
+
+  def index_params
+    params.permit(:status, :metric, :program_id)
   end
 
   def project_params

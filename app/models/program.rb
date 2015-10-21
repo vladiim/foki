@@ -40,7 +40,12 @@ class Program < ActiveRecord::Base
   end
 
   def metric_title_syms
-    memoised_metrics.map { |m| m.title.to_sym }
+    # memoised_metrics.map { |m| m.title.to_sym }
+    metric_titles.map { |m| m.to_sym }
+  end
+
+  def metric_titles
+    memoised_metrics.map { |m| m.title }
   end
 
   private

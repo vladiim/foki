@@ -1,0 +1,27 @@
+- @metric_filter ||= 'all'
+- @status_filter ||= 'all'
+
+%header
+  %h3 Projects
+
+%section.panel.panel-default.panel-projects
+  .panel-heading
+    %span.filter
+      %b Filter:
+      .dropdown.dropdown-projects
+        %a{class: 'dropdown-toggle', id: 'dropdown-project-live', 'data-toggle' => 'dropdown'}= @status_filter
+        %ul{class: 'dropdown-menu', 'aria-labelledby' => 'dropdown-project-live'}
+          - ['all', 'live', 'backlog'].each do |status|
+            %li
+              = link_to status, send(:projects_path, status: status, metric: @metric_filter, program_id: @program.id), method: :get, remote: true
+      status, for
+      .dropdown.dropdown-projects
+        %a{class: 'dropdown-toggle', id: 'dropdown-project-metric', 'data-toggle' => 'dropdown'}= @metric_filter
+        %ul{class: 'dropdown-menu', 'aria-labelledby' => 'dropdown-project-metric'}
+          - @program.metric_titles.unshift('all').each do |title|
+            %li
+              = link_to title, send(:projects_path, metric: title, status: @status_filter, program_id: @program.id), method: :get, remote: true
+      metrics
+
+  #projects
+    = render partial: 'projects/index'
