@@ -16,7 +16,7 @@
             NA
           %span.details change
     .panel-footer
-      = render partial: "#{@name}s/panel_footer"
+      = render partial: "#{@name}s/panel_footer", locals: {item: panel}
 
 .modal.fade{id: "settingsModal#{panel.id}"}
   .modal-dialog.modal-lg

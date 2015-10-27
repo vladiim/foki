@@ -1,10 +1,10 @@
 # now
 
-* make project live / backlog
-
 * add users to programs
 
 * email, sign up etc
+
+* BDD
 
 * Daleting metric should only remove it from the list, otherwise the whole thing breaks
 
