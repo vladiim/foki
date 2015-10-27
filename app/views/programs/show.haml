@@ -26,14 +26,14 @@
   %header
     %h2
       .dropdown.title
-        %a{href: '#', 'data-toggle' => 'dropdown', id: 'dropdown-title'} Daily
+        %a{'data-toggle' => 'dropdown', id: 'dropdown-title'} Daily
         %ul.dropdown-menu
           %li
-            %a{href: '#', 'data-days' => 1, class: 'time-selecter'} Daily
+            %a{'data-days' => 1, class: 'time-selecter'} Daily
           %li
-            %a{href: '#', 'data-days' => 7, class: 'time-selecter'} Weekly
+            %a{'data-days' => 7, class: 'time-selecter'} Weekly
           %li
-            %a{href: '#', 'data-days' => 30, class: 'time-selecter'} Monthly
+            %a{'data-days' => 30, class: 'time-selecter'} Monthly
       metrics
       %span.badge= @metrics.length
 

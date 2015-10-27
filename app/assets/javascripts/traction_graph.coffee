@@ -44,14 +44,6 @@ addLegend = (chart) ->
   legend = chart.addLegend '0%', 10, 500, 20, 'right'
   legend
 
-addInteractiveLegends = (legend) ->
-  $('g.dimple-legend text').on 'click', (event) ->
-    metric = $($(event.target)).text()
-    $modal = $('#metricModal')
-    $modal.modal('show');
-    $modal.find('.modal-title').text("#{metric} projects")
-    width = parseInt($('.modal-content').css('width'), 10)
-
 
 # TODO: filter by last week, filter by month, year etc
 # Latest period only
@@ -65,7 +57,6 @@ makeGraph = ->
   series = addSeries(chart)
   legend = addLegend(chart)
   chart.draw()
-  addInteractiveLegends()
   rotateXAxis(x)
 
 $(document).on 'page:change', ->
