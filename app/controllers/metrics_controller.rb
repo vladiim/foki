@@ -42,13 +42,13 @@ class MetricsController < ApplicationController
   end
 
   def redirect_to_program(message)
-    program_id = params[:metric][:program_id]
+    program_id = metric_params[:program_id]
     respond_to do |format|
       format.html do
         redirect_to program_path(program_id)
         flash[:success] = message
       end
-      format.js { @program = current_user.program_with_children(params[program_id]) }
+      format.js { @program = current_user.program_with_children(program_id) }
     end
   end
 
