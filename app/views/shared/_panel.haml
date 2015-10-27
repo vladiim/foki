@@ -30,6 +30,7 @@
 
       .modal-footer
         - if @name == 'program'
-          = link_to "Delete #{@name} permanantly", send("#{@name}_path".to_sym, id: panel.id, program_id: @program.id),
+          -# = link_to "Delete #{@name} permanantly", send("#{@name}_path".to_sym, id: panel.id, program_id: @program.id),
+          = link_to "Delete #{@name} permanantly", send("#{@name}_path".to_sym, id: panel.id),
             method: :delete, remote: true, data: { confirm: "Are you sure you want to permanantly delete all data for this #{@name}?" }, class: 'btn btn-danger pull-left'
         %button{type: 'button', class: 'btn btn-default', 'data-dismiss' => 'modal'} Close
