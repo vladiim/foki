@@ -10,6 +10,7 @@ class ProgramsController < ApplicationController
   def show
     @program = current_user.program_with_children(params[:id])
     set_metric_resource
+    set_project_filters
   end
 
   def create
@@ -60,6 +61,11 @@ class ProgramsController < ApplicationController
   def set_metric_resource
     @resource_name = :metric
     @resource_path = metrics_path
+  end
+
+  def set_project_filters
+    @metric_filter = 'all'
+    @status_filter = 'all'
   end
 
   def program_params

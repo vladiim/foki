@@ -1,0 +1,3 @@
+- ['all', 'live', 'backlog'].each do |status|
+  %li
+    = link_to status, send(:projects_path, status: status, metric: @metric_filter, program_id: @program.id), method: :get, remote: true

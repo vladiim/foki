@@ -1,4 +1,6 @@
 $('[data-toggle="dropdown"]').parent().removeClass('open');
 $('#dropdown-project-metric').text("<%= j @metric_filter %>");
+$('#dropdown-menu-status').html("<%= j (render 'projects/dropdown_menu_status') %>")
 $('#dropdown-project-live').text("<%= j @status_filter %>");
+$('#dropdown-menu-projects').html("<%= j (render 'projects/dropdown_menu_projects') %>")
 <%= render partial: 'list.js.erb' %>

@@ -1,0 +1,3 @@
+- @program.metric_titles.unshift('all').each do |title|
+  %li
+    = link_to title, send(:projects_path, metric: title, status: @status_filter, program_id: @program.id), method: :get, remote: true
