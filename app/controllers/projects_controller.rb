@@ -19,8 +19,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    # @project  = Project.find(update_params[:id])
-    # @project.update(update_params)
     Project.find(update_params[:id]).update(update_params)
     @program  = current_user.program_with_children(update_params[:program_id])
     @projects = @program.projects
