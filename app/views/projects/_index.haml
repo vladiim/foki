@@ -1,11 +1,8 @@
-- @projects ||= @program.projects
-
 .panel-body
-  %ul.list-group.projects-focus
+  .list-group.projects-focus
     - @projects.each do |project|
-      %li.list-group-item
-        %span.delete= link_to 'x', send(:project_path, project.id, program_id: @program.id), method: :delete, remote: true, data: {confirm: 'Are you sure?'}
-        = project.title
+      %a.list-group-item{'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => "#projectModal#{project.id}"}= project.title
+      = render partial: 'projects/modal_form', locals: {project: project}
 
   .new-project.projects-focus.off
     = simple_form_for :project, url: projects_path, remote: true do |f|

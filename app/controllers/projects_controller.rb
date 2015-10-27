@@ -18,6 +18,17 @@ class ProjectsController < ApplicationController
     @project.save ? redirect_to_program('New project created.') : render_program_index('creating the new project')
   end
 
+  def update
+    # @project  = Project.find(update_params[:id])
+    # @project.update(update_params)
+    Project.find(update_params[:id]).update(update_params)
+    @program  = current_user.program_with_children(update_params[:program_id])
+    @projects = @program.projects
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   def destroy
     Project.find(destroy_params[:id]).destroy
     @program = current_user.program_with_children(destroy_params[:program_id])
@@ -53,6 +64,11 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :program_id, tags: [])
+  end
+
+  def update_params
+    params.require(:project).permit(:id, :program_id, :title, :live)
+      .merge(params.permit(:id))
   end
 
   def destroy_params

@@ -1,5 +1,10 @@
-.projects-focus.off {
-  display: none;
+.projects-focus {
+  &.off {
+    display: none;
+  }
+  a.list-group-item {
+    cursor: pointer;
+  }
 }
 
 .change-projects-view {
@@ -18,11 +23,19 @@
   margin-bottom: 179px;
 }
 
-
 .dropdown-projects {
   display: inline;
 
   a {
     cursor: pointer;
+  }
+}
+
+.radio-buttons {
+  span > label {
+    padding: 5px;
+  }
+  .collection_radio_buttons {
+    margin: 5px;
   }
 }

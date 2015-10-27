@@ -1,4 +1,4 @@
-= simple_form_for(@item) do |f|
+= simple_form_for(item) do |f|
   = f.text_field :title, class: 'form-control'
-  = f.hidden_field :program_id, value: params[:id]
+  = f.hidden_field :program_id, value: @program.id
   = f.submit 'Update', class: 'btn btn-default'
