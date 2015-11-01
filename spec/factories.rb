@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :user do
+    email {"user#{rand(10000000)}@email.com"}
+    password 'password'
+  end
+
   factory :program do
     title 'PROGRAM_TITLE'
     user_id 1
