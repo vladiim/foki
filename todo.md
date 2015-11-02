@@ -1,16 +1,20 @@
 # now
 
-* refactor FocusMetric #add_earliest_date, 
+* refactor FocusMetric #add_earliest_date
+
+* traction graph filter by date (ala baremetrics)
 
 * add users to programs
 
 * email, sign up etc
 
-* BDD
-
 * Deleting metric should only remove it from the list, otherwise the whole thing breaks
 
-* add project description
+* analytics
+
+* BDD
+
+* add project description, hypothesis, test etc
 
 * project list to show last change
 
