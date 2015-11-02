@@ -27,6 +27,13 @@ FactoryGirl.define do
         program.focus_metric = [{"focus_metric"=>second.id, "date"=>"2015-10-02"}.to_json, {"focus_metric"=>second.id - 1, "date"=>"2015-10-05"}.to_json]
       end
     end
+
+    trait :focus_metrics_older_data do
+      after(:create) do |program|
+        metric = create(:metric, :older, program_id: program.id)
+        program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-20"}.to_json]
+      end
+    end
   end
 
   factory :metric do
@@ -41,6 +48,11 @@ FactoryGirl.define do
     trait :second do
       title 'SECOND_METRIC_TITLE'
       data ["{\"date\":\"2015-10-01\",\"value\":\"1\"}", "{\"date\":\"2015-10-02\",\"value\":\"2\"}", "{\"date\":\"2015-10-03\",\"value\":\"3\"}"]
+    end
+
+    trait :older do
+      title 'OLDER_METRIC_TITLE'
+      data {d = []; (1..20).each {|i| d << {date: "2015-10-#{i}", value: 1}.to_json}; d}
     end
   end
 end

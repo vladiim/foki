@@ -1,7 +1,8 @@
 class FocusMetric
-  attr_reader :program
+  attr_reader :program, :program_metrics
   def initialize(program)
-    @program = program
+    @program         = program
+    @program_metrics = program.metrics
   end
 
   def json_data
@@ -13,7 +14,8 @@ class FocusMetric
   def data
     return {} if program.focus_metric.nil?
     ordered_metrics = program.ordered_metrics.dup
-    metrics         = process_metrics(ordered_metrics)
+    all_metrics     = add_earliest_date(ordered_metrics.dup)
+    metrics         = process_metrics(all_metrics)
     calculate_each_change(metrics)
   end
 
@@ -38,6 +40,16 @@ class FocusMetric
     tomorrow.merge(change: change)
   end
 
+  def add_earliest_date(ordered_metrics)
+    first_focus_metric = get_metric(JSON.parse(ordered_metrics[0]))
+    return ordered_metrics unless first_focus_metric && defined?(first_focus_metric.data)
+    hash_data      = first_focus_metric.data.inject([]) {|d, m| d << JSON.parse(m)}
+    ordered_data   = hash_data.sort_by {|d| format_date(d.fetch('date'))}
+    earliest_date  = ordered_data[0].fetch('date')
+    earlist_metric = {focus_metric: first_focus_metric.id, date: earliest_date}.to_json
+    ordered_metrics.unshift(earlist_metric)
+  end
+
   def process_metrics(ordered_metrics)
     data = []
     until ordered_metrics.empty? do
@@ -56,14 +68,20 @@ class FocusMetric
     get_data(focus_metric, metric_data)
   end
 
+  def get_metric(focus_metric)
+    focus_id = focus_metric.fetch('focus_metric').to_i
+    metric   = program_metrics.select { |m| m.id == focus_id }.first
+    return {} unless metric && metric.data
+    metric
+  end
+
   def get_metric_data(focus_metric)
-    focus_id     = focus_metric.fetch('focus_metric').to_i
-    focus_metric = program.metrics.select { |m| m.id == focus_id }.first
-    return {} unless focus_metric && focus_metric.data
-    process_metric_data(focus_metric)
+    metric = get_metric(focus_metric)
+    process_metric_data(metric)
   end
 
   def process_metric_data(focus_metric)
+    return focus_metric if focus_metric.is_a?(Hash)
     focus_metric.data.map do |d|
       JSON.parse(d).
         merge(metric: focus_metric.title)
