@@ -24,7 +24,7 @@ RSpec.describe FocusMetric do
     context 'with program focus data' do
       let(:data) { [{"date"=>"2015-10-05", "value"=>"2", :metric=>"METRIC_TITLE", :change=>1.0}].map { |d| d.to_json } }
 
-      it 'returns the relevant data within the timeframe', focus: true do
+      it 'returns the relevant data within the timeframe' do
         expect(result).to eql(data)
       end
     end
@@ -42,9 +42,7 @@ RSpec.describe FocusMetric do
       let(:program) { create :program, :focus_metrics_older_data }
       let(:data)    { (1..19).each.inject([]) {|d, i| d << {date: "2015-10-#{i + 1}", value: 1, metric: 'OLDER_METRIC_TITLE', change: 0.0}.to_json } }
 
-      it "pulls the focus metric's older data", focus: true do
-        # byebug
-        byebug
+      it "pulls the focus metric's older data" do
         expect(result).to eql(data)
       end
     end
