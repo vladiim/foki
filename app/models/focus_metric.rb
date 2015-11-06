@@ -10,15 +10,15 @@ class FocusMetric
     data.map { |d| d.to_json }
   end
 
+  def data
+    calculate_all_change(focus_metric_data)
+  end
+
   private
 
   def program_ordered_metrics
     return {} if program.focus_metric.nil?
     program.ordered_metrics.inject([]) {|d, m| d << JSON.parse(m)}
-  end
-
-  def data
-    calculate_all_change(focus_metric_data)
   end
 
   def add_earliest_date(metrics)

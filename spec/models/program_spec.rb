@@ -38,7 +38,7 @@ RSpec.describe Program, type: :model do
     end
   end
 
-  describe 'focus metric' do
+  describe '#latest_metric_id' do
     let(:fmetric) { [{"date"=>"2015-10-01", "focus_metric"=>"LATEST METRIC"}, {"date"=>"2015-09-01", "focus_metric"=>"EARLIEST"}].map {|d| d.to_json } }
     before { allow(subject).to receive(:focus_metric) { fmetric } }
 
@@ -89,6 +89,23 @@ RSpec.describe Program, type: :model do
         it 'returns no focus metric' do
           expect(result).to eql('No focus metric')
         end
+      end
+    end
+  end
+
+  describe '#latest_focus_metric_date' do
+    let(:result)  { subject.latest_focus_metric_date }
+
+    context 'with focus metric data' do
+      let(:subject) { create :program }
+      it 'returns the max date' do
+        expect(result).to eql('2015-10-05')
+      end
+    end
+
+    context 'without focus metric data' do
+      it 'returns nothing' do
+        expect(result).to eql ''
       end
     end
   end

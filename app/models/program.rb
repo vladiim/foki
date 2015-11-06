@@ -34,13 +34,18 @@ class Program < ActiveRecord::Base
     latest_metric.title
   end
 
+  def latest_focus_metric_date
+    data = FocusMetric.new(self).data
+    return '' if data.empty?
+    data.max { |d| d.date }.fetch('date')
+  end
+
   def data
     return 0 unless latest_metric_id
     latest_metric.data
   end
 
   def metric_title_syms
-    # memoised_metrics.map { |m| m.title.to_sym }
     metric_titles.map { |m| m.to_sym }
   end
 
