@@ -35,9 +35,7 @@ class Program < ActiveRecord::Base
   end
 
   def latest_focus_metric_date
-    data = FocusMetric.new(self).data
-    return '' if data.empty?
-    data.max { |d| d.date }.fetch('date')
+    @latest_focus_metric_date ||= calc_latest_focus_metric_date
   end
 
   def data
@@ -55,14 +53,18 @@ class Program < ActiveRecord::Base
 
   private
 
-  attr_reader :mem_metrics
-  def memoised_metrics
-    @mem_metrics ||= metrics
+  def calc_latest_focus_metric_date
+    data = FocusMetric.new(self).data
+    return '' if data.empty?
+    data.max { |d| formate_date(d.fetch('date')) }.fetch('date')
   end
 
-  attr_reader :mem_latest_metric
+  def memoised_metrics
+    @memoised_metrics ||= metrics
+  end
+
   def latest_metric
-    @mem_latest_metric ||= Metric.find(latest_metric_id)
+    @latest_metric ||= Metric.find(latest_metric_id)
   end
 
   def ensure_json_metrics
@@ -86,5 +88,9 @@ class Program < ActiveRecord::Base
 
   def create_focus_metric
     self.focus_metric = [updated_focus_metric]
+  end
+
+  def formate_date(date)
+    Date.strptime(date)
   end
 end

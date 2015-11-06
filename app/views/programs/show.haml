@@ -10,12 +10,12 @@
       .col-xs-4#date-range
         .form-group.col-xs-5
           .input-group
-            %input{type: 'text', class: 'form-control', value: '2 Oct 2015', id: 'from-date'}
+            %input{type: 'text', class: 'form-control', value: @program.latest_focus_metric_date, id: 'from-date'}
         .col-xs-1
           .break-date= "-"
         .form-group.col-xs-5
           .input-group
-            %input{type: 'text', class: 'form-control', value: '10 Oct 2015', id: 'to-date'}
+            %input{type: 'text', class: 'form-control', value: Date.strptime(@program.latest_focus_metric_date) - 7, id: 'to-date'}
 
     .row
       .col-xs-8
