@@ -4,4 +4,6 @@
 //= require bootstrap-sprockets
 //= require underscore
 //= require d3
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .

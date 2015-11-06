@@ -1,8 +1,14 @@
 # now
 
-* refactor FocusMetric #add_earliest_date
+* traction graph filter by date
 
-* traction graph filter by date (ala baremetrics)
+    - traction graph
+
+    - default date
+
+    - can't choose date out of available range
+
+    - Metric summary also filtered by date
 
 * add users to programs
 
@@ -13,6 +19,8 @@
 * analytics
 
 * BDD
+
+* style projects ala: http://www.smashingmagazine.com/2015/11/flexbox-interfaces-tracks-case-study/
 
 * add project description, hypothesis, test etc
 

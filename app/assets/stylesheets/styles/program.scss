@@ -1,3 +1,16 @@
-.dropdown.title, #focus-metric b, #focus-metric .dropdown.metric {
-  display: inline-block;
+#show-program {
+
+  h1 {
+    margin-top: 0;
+  }
+
+  #date-range {
+    .form-control {
+      @extend a;
+    }
+  }
+
+  .dropdown.title, #focus-metric, #focus-metric b, #focus-metric .dropdown.metric {
+    display: inline-block;
+  }
 }

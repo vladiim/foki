@@ -4,11 +4,23 @@ Y_AXIS         = 'change';
 X_AXIS         = 'date';
 DIM            = 'metric';
 
-getData = ->
+@tractionGraphGetData = ->
   chart = $(CHART_SELECTOR)
   parseData(chart.data(DATA_SELECTOR))
 
 parseData = (data) -> _.map data, (d) -> JSON.parse d
+
+@removeTractionGraphChart = ->
+  $(CHART_SELECTOR).html('')
+
+@createTractionGraphChart = (data) ->
+  chart  = createChart(data)
+  x      = addXAxis(chart)
+  y      = addYAxis(chart)
+  series = addSeries(chart)
+  legend = addLegend(chart)
+  chart.draw()
+  rotateXAxis(x)
 
 createChart = (data) ->
   width = parseInt($(CHART_SELECTOR).css('width'), 10)
@@ -50,14 +62,8 @@ addLegend = (chart) ->
 # dimple.filterData(data, "Date", "01/12/2012");
 
 makeGraph = ->
-  data   = getData()
-  chart  = createChart(data)
-  x      = addXAxis(chart)
-  y      = addYAxis(chart)
-  series = addSeries(chart)
-  legend = addLegend(chart)
-  chart.draw()
-  rotateXAxis(x)
+  data = tractionGraphGetData()
+  createTractionGraphChart(data)
 
 $(document).on 'page:change', ->
   if $(CHART_SELECTOR).length > 0 then makeGraph()

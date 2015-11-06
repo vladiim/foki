@@ -5,6 +5,7 @@
 // Bootstrap
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap-datetimepicker';
 
 // Styles
 @import "styles/global";
@@ -14,3 +15,4 @@
 @import "styles/program";
 @import "styles/projects";
 @import "styles/metrics";
+@import "styles/date_picker";

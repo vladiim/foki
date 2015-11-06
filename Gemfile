@@ -15,6 +15,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'simple_form', '~> 3.2.0'
 gem 'd3-rails', '~> 3.5.6'
 gem 'underscore-rails', '~> 1.8.3'
+gem 'momentjs-rails', '~> 2.10.6'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 
 # ------ # API # ------ #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

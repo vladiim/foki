@@ -1,0 +1,19 @@
+#date-range {
+  padding: 0;
+
+  .form-group {
+    padding: 0;
+
+    .form-control {
+      border: 0;
+      box-shadow: 0;
+      -webkit-box-shadow: 0 !important;
+      -moz-box-shadow: 0 !important;
+      cursor: pointer;
+    }
+  }
+
+  .break-date {
+    margin-top: 5px;
+  }
+}
