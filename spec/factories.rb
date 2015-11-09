@@ -57,7 +57,6 @@ FactoryGirl.define do
 
     trait :older do
       title 'OLDER_METRIC_TITLE'
-      # data {d = []; (1..20).each {|i| d << {date: "2015-10-#{i}", value: 1}.to_json}; d}
       data {(1..20).each.inject([]) {|d, i| d << {date: "2015-10-#{i}", value: 1}.to_json}}
     end
   end

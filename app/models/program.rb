@@ -56,7 +56,8 @@ class Program < ActiveRecord::Base
   def calc_latest_focus_metric_date
     data = FocusMetric.new(self).data
     return '' if data.empty?
-    data.max { |d| formate_date(d.fetch('date')) }.fetch('date')
+    data.sort { |a, b| format_date(a.fetch('date')) <=> format_date(b.fetch('date')) }[-1]
+      .fetch('date')
   end
 
   def memoised_metrics
@@ -90,7 +91,7 @@ class Program < ActiveRecord::Base
     self.focus_metric = [updated_focus_metric]
   end
 
-  def formate_date(date)
+  def format_date(date)
     Date.strptime(date)
   end
 end

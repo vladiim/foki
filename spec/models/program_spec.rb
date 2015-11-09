@@ -94,10 +94,11 @@ RSpec.describe Program, type: :model do
   end
 
   describe '#latest_focus_metric_date' do
-    let(:result)  { subject.latest_focus_metric_date }
+    let(:result) { subject.latest_focus_metric_date }
 
     context 'with focus metric data' do
       let(:subject) { create :program, :multiple_focus_metrics }
+
       it 'returns the max date' do
         expect(result).to eql('2015-10-05')
       end

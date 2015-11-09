@@ -56,13 +56,9 @@ addLegend = (chart) ->
   legend = chart.addLegend '0%', 10, 500, 20, 'right'
   legend
 
-
-# TODO: filter by last week, filter by month, year etc
-# Latest period only
-# dimple.filterData(data, "Date", "01/12/2012");
-
 makeGraph = ->
-  data = tractionGraphGetData()
+  # data = tractionGraphGetData()
+  data = @getTractionGraphData()
   createTractionGraphChart(data)
 
 $(document).on 'page:change', ->

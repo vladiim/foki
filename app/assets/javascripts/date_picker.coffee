@@ -19,17 +19,17 @@ changeDateListener = (selector) ->
   $(selector).on 'dp.change', (event) => changeTractionGraphChart()
 
 changeTractionGraphChart = ->
-  data = getData()
+  data = getTractionGraphData()
   removeTractionGraphChart()
   createTractionGraphChart(data)
 
-getData = ->
+@getTractionGraphData = ->
   _.filter(tractionGraphGetData(), filterData)
 
 filterData = (data) ->
   from_date = getDate(FROM_DATE_SELECTOR)
   to_date   = getDate(TO_DATE_SELECTOR)
-  date = new Date(data.date)
+  date      = new Date(data.date)
   from_date <= date && to_date >= date
 
 getDate = (selector) ->
