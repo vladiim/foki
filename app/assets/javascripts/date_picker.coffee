@@ -11,6 +11,7 @@ showDatePicker = (selector) ->
     locale: 'en-au'
     format: 'DD MMM YYYY'
     viewMode: 'days'
+    enabledDates: getEnabledDates()
 
 changeDateListeners = ->
   _.each(SELECTORS, changeDateListener)
@@ -35,6 +36,8 @@ filterData = (data) ->
 getDate = (selector) ->
   date = $(selector)[0].value
   new Date(date)
+
+getEnabledDates = -> $(DATE_SELECTOR).data('enabled-dates')
 
 init = ->
   setupDatePickers()

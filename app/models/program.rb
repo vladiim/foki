@@ -16,6 +16,10 @@ class Program < ActiveRecord::Base
     FocusMetric.new(self).json_data
   end
 
+  def focus_data_dates
+    FocusMetric.new(self).data.map { |d| d.fetch('date') }
+  end
+
   def latest_metric_id
     return if focus_metric.nil?
     latest_metric = JSON.parse(ordered_metrics.last)

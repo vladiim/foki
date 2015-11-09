@@ -7,7 +7,7 @@
       .col-xs-8
         %h1= @program.title.titleize
 
-      .col-xs-4#date-range
+      .col-xs-4#date-range{'data-enabled-dates' => @program.focus_data_dates}
         .form-group.col-xs-5
           .input-group
             %input{type: 'text', class: 'form-control', value: @from_date, id: 'from-date'}
