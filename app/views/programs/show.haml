@@ -2,20 +2,32 @@
 
 %section#show-program
 
-  %section.traction-graph
-    %header.row
-      .col-xs-8
-        %h1= @program.title.titleize
+  %section.traction-graph.row
 
-      .col-xs-4#date-range{'data-enabled-dates' => @program.focus_data_dates}
-        .form-group.col-xs-5
-          .input-group
-            %input{type: 'text', class: 'form-control', value: @program.from_date, id: 'from-date'}
-        .col-xs-1
-          .break-date= "-"
-        .form-group.col-xs-5
-          .input-group
-            %input{type: 'text', class: 'form-control', value: @program.to_date, id: 'to-date'}
+    %header
+      %h1= "#{@program.title.titleize}"
+
+    .panel.panel-default
+
+      .panel-body
+
+        .col-xs-8
+          .program-team
+            %b Program team
+            .names
+              John, Pete,
+              %a Invite new
+
+        .col-xs-4#date-range{'data-enabled-dates' => @program.focus_data_dates}
+          %b Date range
+          .form-group.col-xs-5
+            .input-group
+              %input{type: 'text', class: 'form-control', value: @program.from_date, id: 'from-date'}
+          .col-xs-1
+            .break-date= "-"
+          .form-group.col-xs-5
+            .input-group
+              %input{type: 'text', class: 'form-control', value: @program.to_date, id: 'to-date'}
 
     .row
       .col-xs-8

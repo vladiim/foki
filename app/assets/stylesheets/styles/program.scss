@@ -8,9 +8,24 @@
     .form-control {
       @extend a;
     }
+    .input-group, b {
+      margin-left: 20px;
+    }
+    b {
+      display: block;
+    }
   }
 
   .dropdown.title, #focus-metric, #focus-metric b, #focus-metric .dropdown.metric {
     display: inline-block;
+  }
+}
+
+.program-team {
+  b {
+    display: block;
+  }
+  .names {
+    margin-top: 7.5px;
   }
 }
