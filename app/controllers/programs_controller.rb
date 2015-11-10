@@ -8,9 +8,7 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    @program   = current_user.program_with_children(params[:id])
-    @to_date   = Date.strptime(@program.latest_focus_metric_date).strftime("%d %b %Y")
-    @from_date = (Date.strptime(@program.latest_focus_metric_date) - 14).strftime("%d %b %Y")
+    @program = current_user.program_with_children(params[:id])
     set_metric_resource
     set_project_resources
   end

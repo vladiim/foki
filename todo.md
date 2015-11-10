@@ -1,15 +1,5 @@
 # now
 
-* traction graph filter by date
-
-    - traction graph
-
-    - default date
-
-    - can't choose date out of available range
-
-    - Metric summary also filtered by date
-
 * add users to programs
 
 * email, sign up etc
@@ -19,6 +9,10 @@
 * analytics
 
 * BDD
+
+    - for rails
+
+    - for javascript
 
 * style projects ala: http://www.smashingmagazine.com/2015/11/flexbox-interfaces-tracks-case-study/
 

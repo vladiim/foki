@@ -1,29 +1,19 @@
 STAT_SUMMARY      = '.stat-summary'
-TIME_SELECTOR     = '.time-selecter'
 DROPDOWN_SELECTOR = '#dropdown-title'
 STAT_SELECTOR     = '.stat'
 CHANGE_SELECTOR   = '.change'
 
 refreshStatsListener = ->
-  document.addEventListener 'refreshStats', (event) =>
-    alert('worked')
-    showStats()
-
-timeSelectorListener = ->
-  $(TIME_SELECTOR).on 'click', (event) =>
-    $target = $(event.target)
-    $(DROPDOWN_SELECTOR).text($target.text())
-    showStats($target.data('days'))
+  document.addEventListener 'refreshStats', (event) => showStats()
 
 sumValues = (count, item) => count + item.value
 
-statSum = (data, start, end) ->
-  data = data.slice(start, end)
-  _.reduce(data, sumValues, 0)
+statSum = (data) -> parseInt(_.reduce(data, sumValues, 0)).toLocaleString()
 
-percChange = (data, days) ->
-  now    = statSum(data, 0, days)
-  prev   = statSum(data, days, days * 2)
+percChange = (data) ->
+  if data.length is 0 then return 'Missing data'
+  now    = data[0].value
+  prev   = data[data.length - 1].value
   change = (now - prev) / prev
   res    = "#{change.toFixed(2) * 100}%"
   if isNaN(prev) then 'Missing data' else res
@@ -38,23 +28,21 @@ getData = (stat) ->
   metrics = stat.data('metrics')
   data    = _.map metrics, formatDataItem
   ordered = _.sortBy data, (d) => d.date
-  ordered.reverse()
+  _.filter(ordered.reverse(), @filterData)
 
-showStat = (article, days) ->
+showStat = (article) ->
   $stat   = $(article).find(STAT_SELECTOR)
   $change = $(article).find(CHANGE_SELECTOR)
   data    = getData($stat)
-  $stat.text(statSum(data, 0, days))
-  $change.text(percChange(data, days))
+  $stat.text(statSum(data))
+  $change.text(percChange(data))
 
-@showStats = (days) ->
-  days           = days || 1
+@showStats = ->
   $stat_articles = $(STAT_SUMMARY)
-  _.each $stat_articles, (article) => showStat(article, days)
+  _.each $stat_articles, (article) => showStat(article)
 
 activateMetricSummary = ->
   showStats()
-  timeSelectorListener()
   refreshStatsListener()
 
 $(document).on 'page:change', ->

@@ -105,8 +105,33 @@ RSpec.describe Program, type: :model do
     end
 
     context 'without focus metric data' do
-      it 'returns nothing' do
-        expect(result).to eql ''
+      let(:today) { Date.today }
+      let(:date)  { "#{today.year}-#{today.month}-#{today.day}"}
+
+      it "returns today's date" do
+        expect(result).to eql date
+      end
+    end
+  end
+
+  describe '#to_date' do
+    let(:result) { subject.to_date }
+
+    context 'has focus metric' do
+      let(:subject) { create :program }
+      it 'formats the latest focus metric date' do
+        expect(result).to eql('05 Oct 2015')
+      end
+    end
+  end
+
+  describe '#from_date' do
+    let(:result) { subject.from_date }
+
+    context 'has focus metric' do
+      let(:subject) { create :program }
+      it 'is 14 days from the to_date' do
+        expect(result).to eql('21 Sep 2015')
       end
     end
   end

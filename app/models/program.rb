@@ -55,11 +55,20 @@ class Program < ActiveRecord::Base
     memoised_metrics.map { |m| m.title }
   end
 
+  def to_date
+    Date.strptime(latest_focus_metric_date).strftime("%d %b %Y")
+  end
+
+  def from_date
+    date = format_date(latest_focus_metric_date) - 14
+    Date.strptime(date.to_s).strftime("%d %b %Y")
+  end
+
   private
 
   def calc_latest_focus_metric_date
     data = FocusMetric.new(self).data
-    return '' if data.empty?
+    return Today.new.value if data.empty?
     data.sort { |a, b| format_date(a.fetch('date')) <=> format_date(b.fetch('date')) }[-1]
       .fetch('date')
   end

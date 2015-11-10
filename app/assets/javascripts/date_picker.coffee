@@ -23,11 +23,12 @@ changeTractionGraphChart = ->
   data = getTractionGraphData()
   removeTractionGraphChart()
   createTractionGraphChart(data)
+  showStats()
 
 @getTractionGraphData = ->
   _.filter(tractionGraphGetData(), filterData)
 
-filterData = (data) ->
+@filterData = (data) ->
   from_date = getDate(FROM_DATE_SELECTOR)
   to_date   = getDate(TO_DATE_SELECTOR)
   date      = new Date(data.date)
