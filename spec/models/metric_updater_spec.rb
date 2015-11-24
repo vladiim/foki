@@ -1,5 +1,4 @@
-require_relative '../spec_helper_lite'
-require_relative '../../app/models/metric_updater'
+require_relative '../spec_helper'
 
 RSpec.describe MetricUpdater do
   let(:subject)     { described_class.new(1, ds_class) }

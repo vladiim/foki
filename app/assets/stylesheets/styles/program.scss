@@ -22,6 +22,12 @@
 }
 
 .program-team {
+  &.invite {
+    .panel-body {
+      height: 110px;
+    }
+  }
+
   b {
     display: block;
   }

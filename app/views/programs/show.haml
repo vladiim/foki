@@ -15,8 +15,9 @@
           .program-team
             %b Program team
             .names
-              John, Pete,
-              %a Invite new
+              = current_user.name
+              %a{href: '#', 'data-toggle' => 'modal', 'data-target' => '#teamMemberInviteModal'} Invite new
+              = render partial: 'team/member_invite_modal'
 
         .col-xs-4#date-range{'data-enabled-dates' => @program.focus_data_dates}
           %b Date range

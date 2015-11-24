@@ -5,6 +5,7 @@ class ProgramsController < ApplicationController
 
   def index
     @programs = current_user.programs
+    @invites = Invite.all(current_user.id)
   end
 
   def show

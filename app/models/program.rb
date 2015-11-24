@@ -1,5 +1,9 @@
 class Program < ActiveRecord::Base
-  belongs_to :user
+  # belongs_to :user
+
+  has_many :program_teams
+  has_many :users, through: :program_teams
+
   has_many :metrics, dependent: :destroy
   has_many :projects, dependent: :destroy
 

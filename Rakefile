@@ -4,3 +4,8 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
+
+task :migrate do
+  puts `rake db:migrate`
+  puts `rake RAILS_ENV='test' db:migrate`
+end

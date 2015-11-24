@@ -2,6 +2,12 @@ FactoryGirl.define do
   factory :user do
     email {"user#{rand(10000000)}@email.com"}
     password 'password'
+
+    trait :with_program do
+      after(:create) do |user|
+        create(:program, user_id: user.id)
+      end
+    end
   end
 
   factory :program do
@@ -58,6 +64,16 @@ FactoryGirl.define do
     trait :older do
       title 'OLDER_METRIC_TITLE'
       data {(1..20).each.inject([]) {|d, i| d << {date: "2015-10-#{i}", value: 1}.to_json}}
+    end
+  end
+
+  factory :program_team do
+    email {"user#{rand(10000000)}@email.com"}
+    from_id 1
+    program_id 1
+    after(:create) do |program_team|
+      user = create :user, email: program_team.email
+      program_team.update(to_id: user.id)
     end
   end
 end

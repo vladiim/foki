@@ -14,6 +14,12 @@
 
     - for javascript
 
+***
+
+# best practice
+
+* integrate data with https://rjmetrics.com/product/pipeline/
+
 * style projects ala: http://www.smashingmagazine.com/2015/11/flexbox-interfaces-tracks-case-study/
 
 * add project description, hypothesis, test etc
@@ -23,10 +29,6 @@
 * make traction graph from d3 and responsive
 
 * view metrics
-
-***
-
-# best practice
 
 * deployment todo list
 
@@ -42,34 +44,6 @@
 
 # Functionality
 
-* All add, update, delete actions through Ajax: http://www.gotealeaf.com/blog/the-detailed-guide-on-how-ajax-works-with-ruby-on-rails
-
-* Traction graph
-
-    - Traction graph data
-
-    - Last 10 days, date range
-
-* Projects CRUD
-
-    - Add project to metric (ideas)
-
-    - Metric as tag for project?
-
-* Metric
-
-    - View historic
-
-* Program list
-
-    - Should show daily traction movement
-
-* Testing
-
-    - BDD
-
-    - Javascript tests
-
 * Data integrations
 
     - Look at exsisting APIs: https://www.xplenty.com/integrations/
@@ -79,12 +53,6 @@
     - Demo dashboard
 
     - Onboarding process
-
-***
-
-# Performance
-
-* Change server to unicorn
 
 ***
 

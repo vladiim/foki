@@ -1,5 +1,4 @@
-require_relative '../spec_helper_lite'
-require_relative '../../app/models/program_updater'
+require_relative '../spec_helper'
 
 RSpec.describe ProgramUpdater do
   let(:program) { double('Program') }

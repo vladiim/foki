@@ -1,0 +1,10 @@
+%article.col-sm-4.program-team.invite
+  .panel.panel-default
+    %header.panel-heading
+      %h3.panel-title= "#{invite.title} (invite)"
+
+    .panel-body
+      %p= "#{invite.from} has invited you to join the #{invite.title} program"
+    .panel-footer
+      %a{href: '#', class: 'btn btn-default'} Accept
+      %a{href: '#', class: 'btn btn-danger'} Decline

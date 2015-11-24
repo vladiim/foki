@@ -1,6 +1,6 @@
 .panel-body
   .list-group.projects-focus
-    - @projects.each do |project|
+    - @program.projects.each do |project|
       %a.list-group-item{'aria-hidden' => true, 'data-toggle' => 'modal', 'data-target' => "#projectModal#{project.id}"}= project.title
       = render partial: 'projects/modal_form', locals: {project: project}
 
