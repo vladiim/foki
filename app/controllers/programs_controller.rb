@@ -4,7 +4,7 @@ class ProgramsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @programs = current_user.programs
+    @programs = current_user.all_programs
     @invites = Invite.all(current_user.id)
   end
 
@@ -33,7 +33,7 @@ class ProgramsController < ApplicationController
         redirect_to programs_path
         flash[:success] = "Program deleted."
       end
-      format.js { set_resource; @programs = current_user.programs }
+      format.js { set_resource; @programs = current_user.all_programs }
     end
   end
 

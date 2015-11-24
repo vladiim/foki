@@ -5,14 +5,15 @@ FactoryGirl.define do
 
     trait :with_program do
       after(:create) do |user|
-        create(:program, user_id: user.id)
+        program = create :program
+        create :program_team, program_id: program.id, to_id: user.id, from_id: user.id
       end
     end
   end
 
   factory :program do
     title 'PROGRAM_TITLE'
-    user_id 1
+    # user_id 1
     after(:create) do |program|
       metric = create(:metric, program_id: program.id)
       program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}.to_json]

@@ -17,7 +17,7 @@ RSpec.describe Invite do
     let(:result) {described_class.all(id)}
 
     context 'no invites' do
-      let(:id) {2}
+      let(:id) {200}
       it 'returns an empty array' do
         expect(result).to eq []
       end

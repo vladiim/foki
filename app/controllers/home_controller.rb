@@ -13,6 +13,7 @@ class HomeController < ApplicationController
 
   def authenticated_home
     @programs = current_user.programs
+    @invites  = Invite.all(current_user.id)
     render 'programs/index'
   end
 
