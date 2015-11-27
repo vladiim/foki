@@ -1,6 +1,7 @@
 class Invite
-  attr_reader :from, :title
+  attr_reader :id, :from, :title
   def initialize(team)
+    @id    = team.id
     @title = Program.find(team.program_id).title
     @from  = User.find(team.from_id).name
   end
@@ -15,6 +16,7 @@ class Invite
   def self.program_teams(to_id)
     ProgramTeam.includes(:inviter).
       where(to_id: to_id).
+      where.not(from_id: to_id).
       all
   end
 

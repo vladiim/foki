@@ -1,4 +1,4 @@
-%article.col-sm-4.program-team.invite
+%article{class: "col-sm-4 program-team invite-#{invite.id}"}
   .panel.panel-default
     %header.panel-heading
       %h3.panel-title= "#{invite.title} (invite)"
@@ -6,5 +6,11 @@
     .panel-body
       %p= "#{invite.from} has invited you to join the #{invite.title} program"
     .panel-footer
-      %a{href: '#', class: 'btn btn-default'} Accept
-      %a{href: '#', class: 'btn btn-danger'} Decline
+      = simple_form_for :program_team, url: program_team_path(invite.id), method: :put do |f|
+        = f.hidden_field :accepted, value: Date.today
+        = f.hidden_field :to_id, value: current_user.id
+        = f.button :submit, 'Accept', class: 'btn btn-default'
+
+      = simple_form_for :program_team, url: program_team_path(invite.id), method: :delete, remote: true do |f|
+        = f.hidden_field :to_id, value: current_user.id
+        = f.button :submit, 'Decline', class: 'btn btn-danger'

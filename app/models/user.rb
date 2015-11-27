@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
-  # has_many :programs
-  has_many :program_teams, foreign_key: 'from_id'
-  has_many :program_teams, foreign_key: 'to_id'
+  has_many :program_teams, foreign_key: 'from_id', dependent: :destroy
+  has_many :program_teams, foreign_key: 'to_id', dependent: :destroy
   has_many :programs, through: :program_teams
 
   # Include default devise modules. Others available are:

@@ -54,6 +54,8 @@
 
     - Onboarding process
 
+* rewrite logic in aws lambda
+
 ***
 
 # Analytics
