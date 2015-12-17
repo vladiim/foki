@@ -15,7 +15,7 @@ class Invite
 
   def self.program_teams(to_id)
     ProgramTeam.includes(:inviter).
-      where(to_id: to_id).
+      where(to_id: to_id, accepted: nil).
       where.not(from_id: to_id).
       all
   end

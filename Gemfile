@@ -34,6 +34,9 @@ gem 'devise', '~> 3.5.2'
 gem 'puma', '~> 2.6.0'
 gem 'rails_12factor', group: :production
 
+# ------ # EMAIL # ------ #
+gem 'mandrill-api', '~> 1.0.53'
+
 # ------ # TEST # ------ #
 group :development, :test do
   gem 'rspec-rails',        '~> 3.3.3'
@@ -51,6 +54,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'web-console',  '~> 2.0'
+  gem 'spring',       '~> 1.4.0'
+  gem 'dotenv-rails', '~> 2.0.2'
 end

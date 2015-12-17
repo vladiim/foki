@@ -12,11 +12,6 @@ class User < ActiveRecord::Base
     @all_programs ||= get_all_programs
   end
 
-  def program(program_id)
-    programs.where(user_id: self.id).
-      first
-  end
-
   def program_with_children(program_id)
     all_programs.select do |program|
       program.id == program_id.to_i
@@ -37,10 +32,17 @@ class User < ActiveRecord::Base
   end
 
   def get_program_ids
-    ProgramTeam.includes(:program).
-      uniq.
-      where("from_id = ? OR to_id = ?", self.id, self.id).
-      all.
+    self_programs_teams.
+      select {|pt| invite_accepted?(pt)}.
       map {|pt| pt.program_id}
+  end
+
+  def self_programs_teams
+    ProgramTeam.includes(:program).
+      uniq.where("from_id = ? OR to_id = ?", self.id, self.id).all
+  end
+
+  def invite_accepted?(program_team)
+    program_team.to_id != self.id || program_team.accepted != nil
   end
 end

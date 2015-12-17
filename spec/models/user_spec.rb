@@ -20,4 +20,24 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '#all_programs' do
+    let(:result) {subject.all_programs}
+
+    context 'user with programs' do
+      let(:subject) {create :user, :with_program}
+
+      it 'returns the program' do
+        expect(result.first).to eql Program.last
+      end
+    end
+
+    context 'user invited to a program', focus: true do
+      let(:subject) {create :user, :with_program_team_invite}
+
+      it "doesn't return the program" do
+        expect(result).to be_empty
+      end
+    end
+  end
 end

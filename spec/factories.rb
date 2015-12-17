@@ -9,11 +9,17 @@ FactoryGirl.define do
         create :program_team, program_id: program.id, to_id: user.id, from_id: user.id
       end
     end
+
+    trait :with_program_team_invite do
+      after(:create) do |user|
+        program = create :program
+        create :program_team, program_id: program.id, to_id: user.id, from_id: 500
+      end
+    end
   end
 
   factory :program do
     title 'PROGRAM_TITLE'
-    # user_id 1
     after(:create) do |program|
       metric = create(:metric, program_id: program.id)
       program.focus_metric = [{"focus_metric"=>metric.id, "date"=>"2015-10-04"}.to_json]
@@ -71,10 +77,14 @@ FactoryGirl.define do
   factory :program_team do
     email {"user#{rand(10000000)}@email.com"}
     from_id 1
+    # to_id 1
     program_id 1
-    after(:create) do |program_team|
-      user = create :user, email: program_team.email
-      program_team.update(to_id: user.id)
+
+    trait :default_to_user do
+      after(:create) do |program_team|
+        user = create :user, email: program_team.email
+        program_team.update(to_id: user.id)
+      end
     end
   end
 end

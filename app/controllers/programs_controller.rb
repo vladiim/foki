@@ -45,6 +45,7 @@ class ProgramsController < ApplicationController
   end
 
   def redirect_to_program(program, message)
+    @team = create_team
     respond_to do |format|
       format.html do
         redirect_to program
@@ -52,6 +53,13 @@ class ProgramsController < ApplicationController
       end
       format.js { set_resource; @programs = current_user.programs }
     end
+  end
+
+  def create_team
+    ProgramTeam.create(program_id: program.id,
+      from_id: current_user.id,
+      to_id: current_user.id,
+      accepted: Date.today)
   end
 
   def set_resource

@@ -19,16 +19,19 @@ RSpec.describe 'user features', type: :feature do
 
     context 'user adds team member' do
 
+      before do
+        click_link 'Invite new'
+        within('form.program_team') do
+          fill_in 'program_team_email', with: team_member.email
+          click_button 'Invite team member'
+        end
+        click_link 'Logout'
+      end
+
       context 'team member is a user' do
         let(:team_member) {create :user}
 
         before do
-          click_link 'Invite new'
-          within('#teamMemberInviteModal') do
-            fill_in 'Email', with: team_member.email
-            click_button 'Invite team member'
-          end
-          click_link 'Logout'
           sign_in_with(team_member.email, team_member.password)
         end
 
@@ -61,6 +64,11 @@ RSpec.describe 'user features', type: :feature do
       end
 
       context 'team member is not a user' do
+        let(:team_member) {OpenStruct.new(email: 'test@email.com')}
+
+        it 'sends an email to the team member' do
+
+        end
       end
     end
   end
